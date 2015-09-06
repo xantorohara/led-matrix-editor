@@ -126,7 +126,8 @@ table.leds td.active {
 #output {
     resize: none;
     padding: 5px;
-    width: 250px;
+    white-space: normal;
+    /*width: 250px;*/
     height: 400px;
     overflow-y: scroll;
 }
