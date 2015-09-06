@@ -105,7 +105,8 @@ $(function () {
     var savedHashState;
 
     function printArduinoCode(patterns) {
-        var out = ['const uint64_t PATTERNS[',patterns.length,'] = {\n'];
+        var out = ['const int PATTERNL = ', patterns.length, ';\n',
+            'const uint64_t PATTERNS[PATTERNL] = {\n'];
 
         for (var i = 0; i < patterns.length; i++) {
             out.push('0x');
