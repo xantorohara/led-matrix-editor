@@ -104,6 +104,25 @@ $(function () {
 
     var savedHashState;
 
+    function printArduinoCode(patterns) {
+        var out = ['const uint64_t PATTERNS[',patterns.length,'] = {\n'];
+
+        for (var i = 0; i < patterns.length; i++) {
+            out.push('0x');
+            out.push(patterns[i]);
+
+            if (i < patterns.length - 1) {
+                if (i % 4 == 3) {
+                    out.push(',\n');
+                } else {
+                    out.push(', ');
+                }
+            }
+        }
+        out.push('\n};\n');
+        $outputTextarea.val(out.join(''));
+    }
+
     function saveState() {
         var out = [];
         $previews.find('.preview').each(function () {
@@ -112,7 +131,7 @@ $(function () {
 
         window.location.hash = savedHashState = out.join('|');
 
-        $outputTextarea.val('[0x' + out.join(', 0x') + ']')
+        printArduinoCode(out);
     }
 
     function loadState() {
@@ -123,10 +142,9 @@ $(function () {
             preview = makePreviewElement(patterns[i], false);
             $previews.append(preview);
         }
-        $outputTextarea.val('const uint64_t PATTERNS[] = {0x' + patterns.join(', 0x') + '};');
-
         preview.addClass('selected');
         $hexInput.val(preview.attr('data-hex'));
+        printArduinoCode(patterns);
         hexToLeds();
     }
 
