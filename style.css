@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    background: #ccc linear-gradient(#eee, #ccc);
+}
+
+body, h1, h2, ul, button, input {
+    padding: 5px;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+ul {
+    list-style: inside;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+a, button{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#bookmark {
+    margin: 5px;
+    font-size: 12px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+button {
+    min-width: 75px;
+    margin: 5px;
+}
+
+#input {
+    margin: 10px 5px 10px 0;
+    text-align: center;
+    width: 160px;
+}
+
+table.leds,
+table.cols,
+table.rows {
+    border-spacing: 5px;
+}
+
+table.leds {
+    background-color: #333;
+    box-shadow: 1px 1px 10px #333;
+}
+
+table.leds td,
+table.cols td,
+table.rows td {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+td.invert {
+    cursor: pointer;
+}
+
+table.leds td {
+    border-radius: 50%;
+    box-shadow: inset 0 0 1px #666666;
+    background: lightgrey radial-gradient(ellipse at center, lightgrey 0%, white 50%, lightgrey 100%);
+}
+
+table.leds td.active {
+    background: orangered radial-gradient(ellipse at center, lightcoral 0%, orangered 50%, red 100%);
+
+}
+
+#previews {
+    box-sizing: border-box;
+    padding: 5px;
+    height: 180px;
+    overflow-y: scroll;
+    border: solid #999 1px;
+    background: #ccc linear-gradient(#ccc, #aaa);
+}
+
+#previews table.preview {
+    margin: 3px;
+    float: left;
+    background-color: #333;
+    border-spacing: 2px;
+    border: solid #ccc 2px;
+}
+
+#previews table.preview td {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 1px lightslategray;
+    background: lightgrey;
+}
+
+#previews table.preview td.active {
+    background: orangered;
+}
+
+#previews table.preview.selected {
+    border-color: dodgerblue;
+}
+
+#output {
+    resize: none;
+    padding: 5px;
+    width: 250px;
+    height: 400px;
+    overflow-y: scroll;
+}
