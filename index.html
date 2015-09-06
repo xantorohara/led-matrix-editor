@@ -4,14 +4,14 @@
     <title>LED Matrix Editor</title>
 
     <meta charset="UTF-8">
-    <meta name="keywords" content="LED matrix, 8x8, online editor">
-    <meta name="description" content="LED matrix 8x8 online editor">
+    <meta name="keywords" content="LED matrix, 8x8, online editor, Arduino code">
+    <meta name="description" content="Online editor: create images for LED matrix">
+    <meta name="author" content="Xantorohara"/>
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
     <script src="script.js"></script>
 </head>
 
@@ -22,7 +22,9 @@
     <h2>Examples</h2>
     <ul>
         <li><a href="#">Blank</a></li>
-        <li><a href="#00183c7effff6600">Icons</a></li>
+        <li>
+            <a href="#00183c7effff6600">Icons</a>
+        </li>
         <li>
             <a href="#3810101010101810|3e0408102022221c|1c2222201822221c|1010103e12121212|1c2220201e02023e|1c2222221e02221c|040404081020203e|1c2222221c22221c|1c22203c2222221c|1c2222222222221c">Digits</a>
         </li>
@@ -37,7 +39,7 @@
 </div>
 
 <div style="text-align: center;">
-    <table style="display: inline-block;">
+    <table style="  display: inline-block;">
         <tr>
             <td></td>
             <td id="cols"></td>
@@ -81,6 +83,37 @@
 <div style="clear: both"></div>
 
 <div id="previews"></div>
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript"> (function (d, w, c) {
+    (w[c] = w[c] || []).push(function () {
+        try {
+            w.yaCounter25278200 = new Ya.Metrika({
+                id: 25278200,
+                clickmap: true,
+                trackLinks: true,
+                accurateTrackBounce: true
+            });
+        } catch (e) {
+        }
+    });
+    var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+        n.parentNode.insertBefore(s, n);
+    };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else {
+        f();
+    }
+})(document, window, "yandex_metrika_callbacks");</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/25278200" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
 
 </body>
 </html>
