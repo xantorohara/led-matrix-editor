@@ -10,13 +10,23 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="script.js"></script>
 </head>
 
+<style>
+    .toolbutton {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+    }
+</style>
 <body>
-<div style="float: left;">
+
+<div style="float: left; margin-right: 50px;">
     <h1>LED Matrix 8x8</h1>
 
     <h2>Examples</h2>
@@ -31,38 +41,28 @@
     </ul>
 </div>
 
-<div style="float: right">
+<div style="float: right; margin-left: 50px;">
     <h2>Arduino/C code:</h2>
 
     <textarea id="output" spellcheck="false" cols="40"></textarea>
 
 </div>
 
-<div style="text-align: center;">
-    <table style="  display: inline-block;">
+<div style="display: inline-block;">
+    <table style="float: left;">
         <tr>
             <td></td>
             <td id="cols"></td>
-            <td></td>
         </tr>
         <tr>
             <td id="rows"></td>
             <td id="leds"></td>
-            <td>
-                <div>
-                    <button id="invert">Invert</button>
-                </div>
-
-                <div>
-                    <button id="clear">Clear</button>
-                </div>
-            </td>
         </tr>
-
         <tr>
             <td></td>
-            <td><input id="input" type="text" maxlength="16" placeholder="UINT64 HEX"></td>
-            <td></td>
+            <td style="text-align: center;">
+                <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
+            </td>
         </tr>
 
         <tr>
@@ -71,16 +71,30 @@
                 <button id="append">Append</button>
                 <button id="update" disabled>Update</button>
                 <button id="delete" disabled>Delete</button>
-                <div id="bookmark">
+
+                <div class="note">
                     *Press CTRL+D to save a bookmark
                 </div>
             </td>
-            <td></td>
         </tr>
     </table>
+
+    <div style="float: right; position: relative; width: 220px; height: 100px; margin: 100px 0 0 50px;">
+        <button id="shiftUp" class="toolbutton" style="top:0; left:40px;">↑</button>
+        <button id="shiftRight" class="toolbutton" style="top:40px; left:80px;">→</button>
+        <button id="shiftDown" class="toolbutton" style="top:80px; left:40px;">↓</button>
+        <button id="shiftLeft" class="toolbutton" style="top:40px; left:0;">←</button>
+        <button id="invert" class="toolbutton" style="top: 0; left: 120px; width: 80px;">Invert</button>
+        <button id="clear" class="toolbutton" style="top: 80px; left: 120px; width: 80px; ">Clear</button>
+    </div>
+
 </div>
 
+
 <div style="clear: both"></div>
+<div class="note">
+    Use Drag-and-Drop to reorder images
+</div>
 
 <div id="previews"></div>
 
