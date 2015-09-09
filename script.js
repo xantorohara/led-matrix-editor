@@ -7,6 +7,10 @@ $(function () {
     var $updateButton = $('#update');
     var $invertButton = $('#invert');
     var $clearButton = $('#clear');
+    var $shiftUpButton = $('#shiftUp');
+    var $shiftRightButton = $('#shiftRight');
+    var $shiftDownButton = $('#shiftDown');
+    var $shiftLeftButton = $('#shiftLeft');
 
     function makeCols() {
         var out = ['<table class="cols"><tr>'];
@@ -88,8 +92,7 @@ $(function () {
     }
 
     function hexToLeds() {
-        var val = $hexInput.val();
-        val = ('0000000000000000' + val).substr(-16);
+        var val = getHexValue();
 
         for (var i = 1; i < 9; i++) {
             var byte = val.substr(-2 * i, 2);
@@ -163,9 +166,65 @@ $(function () {
         ledsToHex();
     });
 
-    $clearButton.mousedown(function () {
+    $clearButton.click(function () {
         $('table.leds td').removeClass('active');
         ledsToHex();
+    });
+
+    function getHexValue() {
+        var val = $hexInput.val();
+        val = val.replace(/[^0-9a-fA-F]/g, '0');
+        val = ('0000000000000000' + val).substr(-16);
+        console.log(val);
+        return val;
+    }
+
+    $shiftUpButton.click(function () {
+        var val = '00' + getHexValue().substr(0, 14);
+        $hexInput.val(val);
+        hexToLeds();
+    });
+
+    $shiftDownButton.click(function () {
+        var val = getHexValue().substr(2, 14) + '00';
+        $hexInput.val(val);
+        hexToLeds();
+    });
+
+    $shiftRightButton.click(function () {
+        var val = getHexValue();
+
+        var out = [];
+        for (var i = 0; i < 8; i++) {
+            var byte = val.substr(i * 2, 2);
+            byte = parseInt(byte, 16);
+            byte <<= 1;
+            byte = byte.toString(16);
+            byte = ('0' + byte).substr(-2);
+            out.push(byte);
+        }
+
+        val = out.join('');
+        $hexInput.val(val);
+        hexToLeds();
+    });
+
+    $shiftLeftButton.click(function () {
+        var val = getHexValue();
+
+        var out = [];
+        for (var i = 0; i < 8; i++) {
+            var byte = val.substr(i * 2, 2);
+            byte = parseInt(byte, 16);
+            byte >>= 1;
+            byte = byte.toString(16);
+            byte = ('0' + byte).substr(-2);
+            out.push(byte);
+        }
+
+        val = out.join('');
+        $hexInput.val(val);
+        hexToLeds();
     });
 
     $('table.cols td').mousedown(function () {

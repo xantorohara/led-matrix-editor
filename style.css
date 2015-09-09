@@ -15,7 +15,7 @@ body {
     background: #ccc linear-gradient(#eee, #ccc);
 }
 
-body, h1, h2, ul, button, input {
+body, h1, h2, ul, input {
     padding: 5px;
 }
 
@@ -39,15 +39,15 @@ a, button{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#bookmark {
+#bookmark, .note {
     margin: 5px;
     font-size: 12px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 button {
-    min-width: 75px;
-    margin: 5px;
+    /*min-width: 75px;*/
+    /*margin: 5px;*/
 }
 
 #input {
@@ -75,9 +75,9 @@ table.rows td {
     cursor: pointer;
 }
 
-td.invert {
-    cursor: pointer;
-}
+/*td.invert {*/
+    /*cursor: pointer;*/
+/*}*/
 
 table.leds td {
     border-radius: 50%;
