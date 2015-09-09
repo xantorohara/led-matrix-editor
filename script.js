@@ -255,15 +255,28 @@ $(function () {
     }
 
     $deleteButton.click(function () {
-        $previews.find('.preview.selected').remove();
-        $deleteButton.attr('disabled', 'disabled');
-        $updateButton.attr('disabled', 'disabled');
+        var selected = $previews.find('.preview.selected').first();
+        var next = selected.next('.preview');
+        if (!next.length) {
+            next = selected.prev('.preview');
+        }
+
+        selected.remove();
+        if (next.length) {
+            next.addClass('selected');
+            $hexInput.val(next.attr('data-hex'));
+        } else {
+            $deleteButton.attr('disabled', 'disabled');
+            $updateButton.attr('disabled', 'disabled');
+        }
         saveState();
     });
 
     $appendButton.click(function () {
         $previews.find('.preview.selected').removeClass('selected');
         $previews.append(makePreviewElement($hexInput.val(), true));
+        $deleteButton.removeAttr('disabled');
+        $updateButton.removeAttr('disabled');
         saveState();
     });
 
