@@ -24,9 +24,10 @@
         height: 30px;
     }
 </style>
-<body>
 
-<div style="float: left; margin-right: 50px;">
+<body style="text-align: center;">
+
+<div style="float: left; margin: 0 10px 10px 0;" class="debug">
     <h1>LED Matrix 8x8</h1>
 
     <h2>Examples</h2>
@@ -41,28 +42,40 @@
     </ul>
 </div>
 
-<div style="float: right; margin-left: 50px;">
+<div style="float: right; margin: 0 0 10px 10px;" class="debug">
     <h2>Arduino/C code:</h2>
 
     <textarea id="output" spellcheck="false" cols="40"></textarea>
 
 </div>
 
-<div style="display: inline-block;">
-    <table style="float: left;">
+<div style="display: inline-block; text-align: center;" class="debug">
+    <table>
         <tr>
             <td></td>
             <td id="cols"></td>
+            <td></td>
         </tr>
         <tr>
             <td id="rows"></td>
             <td id="leds"></td>
+            <td style="padding: 50px;">
+                <div style="display: inline-block; position: relative; width: 200px; height: 110px;">
+                    <button id="shiftUp" class="toolbutton" style="top:0; left:40px;">↑</button>
+                    <button id="shiftRight" class="toolbutton" style="top:40px; left:80px;">→</button>
+                    <button id="shiftDown" class="toolbutton" style="top:80px; left:40px;">↓</button>
+                    <button id="shiftLeft" class="toolbutton" style="top:40px; left:0;">←</button>
+                    <button id="invert" class="toolbutton" style="top: 0; left: 120px; width: 80px;">Invert</button>
+                    <button id="clear" class="toolbutton" style="top: 80px; left: 120px; width: 80px; ">Clear</button>
+                </div>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td style="text-align: center;">
                 <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -76,17 +89,9 @@
                     *Press CTRL+D to save a bookmark
                 </div>
             </td>
+            <td></td>
         </tr>
     </table>
-
-    <div style="float: right; position: relative; width: 220px; height: 100px; margin: 100px 0 0 50px;">
-        <button id="shiftUp" class="toolbutton" style="top:0; left:40px;">↑</button>
-        <button id="shiftRight" class="toolbutton" style="top:40px; left:80px;">→</button>
-        <button id="shiftDown" class="toolbutton" style="top:80px; left:40px;">↓</button>
-        <button id="shiftLeft" class="toolbutton" style="top:40px; left:0;">←</button>
-        <button id="invert" class="toolbutton" style="top: 0; left: 120px; width: 80px;">Invert</button>
-        <button id="clear" class="toolbutton" style="top: 80px; left: 120px; width: 80px; ">Clear</button>
-    </div>
 
 </div>
 
