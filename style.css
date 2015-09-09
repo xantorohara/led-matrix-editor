@@ -4,6 +4,11 @@
     outline: none;
     user-select: none;
     -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+}
+
+input, td, textarea, h1, h2 {
     font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
 }
 
@@ -13,10 +18,13 @@ html, body {
 
 body {
     background: #ccc linear-gradient(#eee, #ccc);
+    padding: 5px;
+    text-align: center;
 }
 
-body, h1, h2, ul, input {
+h1, h2, ul, p {
     padding: 5px;
+    text-align: left;
 }
 
 h1 {
@@ -35,25 +43,54 @@ li {
     margin-bottom: 5px;
 }
 
-a, button{
+li, a, button {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#bookmark, .note {
-    margin: 5px;
-    font-size: 12px;
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: royalblue;
+}
+
+.note {
+    font-size: 13px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 button {
-    /*min-width: 75px;*/
-    /*margin: 5px;*/
+    box-sizing: border-box;
+    font-size: 13px;
+    height: 30px;
+}
+
+#shiftUpButton,
+#shiftRightButton,
+#shiftDownButton,
+#shiftLeftButton {
+    position: absolute;
+    width: 30px;
+}
+
+#invertButton,
+#clearButton,
+#appendButton,
+#updateButton,
+#deleteButton {
+    position: absolute;
+    width: 70px;
 }
 
 #input {
-    margin: 10px 5px 10px 0;
     text-align: center;
     width: 160px;
+    padding: 5px;
 }
 
 table.leds,
@@ -73,11 +110,8 @@ table.rows td {
     width: 25px;
     height: 25px;
     cursor: pointer;
+    font-size: 17px;
 }
-
-/*td.invert {*/
-    /*cursor: pointer;*/
-/*}*/
 
 table.leds td {
     border-radius: 50%;
@@ -87,7 +121,11 @@ table.leds td {
 
 table.leds td.active {
     background: orangered radial-gradient(ellipse at center, lightcoral 0%, orangered 50%, red 100%);
+}
 
+table.cols td:hover,
+table.rows td:hover {
+    color: orangered;
 }
 
 #previews {
@@ -127,11 +165,10 @@ table.leds td.active {
     resize: none;
     padding: 5px;
     white-space: normal;
-    /*width: 250px;*/
-    height: 400px;
+    height: 350px;
     overflow-y: scroll;
 }
 
 .debug {
-    border: dashed red 1px;
+    /*border: dashed red 1px;*/
 }

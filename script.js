@@ -1,16 +1,16 @@
 $(function () {
     var $previews = $('#previews');
     var $hexInput = $('#input');
-    var $appendButton = $('#append');
-    var $deleteButton = $('#delete');
+    var $appendButton = $('#appendButton');
+    var $deleteButton = $('#deleteButton');
     var $outputTextarea = $('#output');
-    var $updateButton = $('#update');
-    var $invertButton = $('#invert');
-    var $clearButton = $('#clear');
-    var $shiftUpButton = $('#shiftUp');
-    var $shiftRightButton = $('#shiftRight');
-    var $shiftDownButton = $('#shiftDown');
-    var $shiftLeftButton = $('#shiftLeft');
+    var $updateButton = $('#updateButton');
+    var $invertButton = $('#invertButton');
+    var $clearButton = $('#clearButton');
+    var $shiftUpButton = $('#shiftUpButton');
+    var $shiftRightButton = $('#shiftRightButton');
+    var $shiftDownButton = $('#shiftDownButton');
+    var $shiftLeftButton = $('#shiftLeftButton');
 
     function makeCols() {
         var out = ['<table class="cols"><tr>'];

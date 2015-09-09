@@ -17,17 +17,9 @@
     <script src="script.js"></script>
 </head>
 
-<style>
-    .toolbutton {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-    }
-</style>
+<body>
 
-<body style="text-align: center;">
-
-<div style="float: left; margin: 0 10px 10px 0;" class="debug">
+<div style="float: left; margin: 0 10px 10px 0;">
     <h1>LED Matrix 8x8</h1>
 
     <h2>Examples</h2>
@@ -42,14 +34,13 @@
     </ul>
 </div>
 
-<div style="float: right; margin: 0 0 10px 10px;" class="debug">
+<div style="float: right; margin: 0 0 10px 10px;">
     <h2>Arduino/C code:</h2>
-
     <textarea id="output" spellcheck="false" cols="40"></textarea>
 
 </div>
 
-<div style="display: inline-block; text-align: center;" class="debug">
+<div style="display: inline-block; text-align: center;">
     <table>
         <tr>
             <td></td>
@@ -59,20 +50,20 @@
         <tr>
             <td id="rows"></td>
             <td id="leds"></td>
-            <td style="padding: 50px;">
-                <div style="display: inline-block; position: relative; width: 200px; height: 110px;">
-                    <button id="shiftUp" class="toolbutton" style="top:0; left:40px;">↑</button>
-                    <button id="shiftRight" class="toolbutton" style="top:40px; left:80px;">→</button>
-                    <button id="shiftDown" class="toolbutton" style="top:80px; left:40px;">↓</button>
-                    <button id="shiftLeft" class="toolbutton" style="top:40px; left:0;">←</button>
-                    <button id="invert" class="toolbutton" style="top: 0; left: 120px; width: 80px;">Invert</button>
-                    <button id="clear" class="toolbutton" style="top: 80px; left: 120px; width: 80px; ">Clear</button>
+            <td style="padding-left: 30px;">
+                <div style="display: inline-block; position: relative; width: 190px; height: 110px;">
+                    <button id="shiftUpButton" style="top:0; left:40px;">↑</button>
+                    <button id="shiftRightButton" style="top:40px; left:80px;">→</button>
+                    <button id="shiftDownButton" style="top:80px; left:40px;">↓</button>
+                    <button id="shiftLeftButton" style="top:40px; left:0;">←</button>
+                    <button id="invertButton" style="top: 0; left: 120px;">Invert</button>
+                    <button id="clearButton" style="top: 80px; left: 120px;">Clear</button>
                 </div>
             </td>
         </tr>
         <tr>
             <td></td>
-            <td style="text-align: center;">
+            <td style="text-align: center; padding: 20px;">
                 <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
             </td>
             <td></td>
@@ -80,26 +71,26 @@
 
         <tr>
             <td></td>
-            <td style="font-size: 0;">
-                <button id="append">Append</button>
-                <button id="update" disabled>Update</button>
-                <button id="delete" disabled>Delete</button>
-
-                <div class="note">
-                    *Press CTRL+D to save a bookmark
+            <td>
+                <div style="display: inline-block; position: relative; width: 230px; height: 30px;">
+                    <button id="appendButton" style="top:0; left: 0;">Append</button>
+                    <button id="updateButton" style="top:0; left: 80px;" disabled>Update</button>
+                    <button id="deleteButton" style="top:0; left: 160px;" disabled>Delete</button>
                 </div>
             </td>
-            <td></td>
+            <td class="note" style="padding-left: 30px">
+                Use CTRL+D to save as a bookmark
+            </td>
         </tr>
     </table>
 
 </div>
 
-
-<div style="clear: both"></div>
-<div class="note">
+<p class="note" style="clear: both">
     Use Drag-and-Drop to reorder images
-</div>
+    <a href="todo" style="float: right;">Sample code</a>
+
+</p>
 
 <div id="previews"></div>
 
