@@ -131,3 +131,7 @@ table.leds td.active {
     height: 400px;
     overflow-y: scroll;
 }
+
+.debug {
+    border: dashed red 1px;
+}
