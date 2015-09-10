@@ -246,42 +246,70 @@ $(function () {
     });
 
     function onPreviewClick() {
-        $previews.find('.preview.selected').removeClass('selected');
-        $(this).addClass('selected');
-        $deleteButton.removeAttr('disabled');
-        $updateButton.removeAttr('disabled');
         $hexInput.val($(this).attr('data-hex'));
+        toggleSaveButtons($(this));
         hexToLeds();
     }
 
-    $deleteButton.click(function () {
-        var selected = $previews.find('.preview.selected').first();
-        var next = selected.next('.preview');
-        if (!next.length) {
-            next = selected.prev('.preview');
-        }
+    function toggleSaveButtons(focusToPreview) {
+        var $selectedPreviews = $previews.find('.preview.selected');
 
-        selected.remove();
-        if (next.length) {
-            next.addClass('selected');
-            $hexInput.val(next.attr('data-hex'));
+        if ($selectedPreviews.length) {
+            $selectedPreviews.removeClass('selected');
+            $deleteButton.removeAttr('disabled');
+            $updateButton.removeAttr('disabled');
         } else {
             $deleteButton.attr('disabled', 'disabled');
             $updateButton.attr('disabled', 'disabled');
         }
+        if (focusToPreview) {
+            focusToPreview.addClass('selected');
+        }
+    }
+
+    $deleteButton.click(function () {
+        var $selectedPreview = $previews.find('.preview.selected').first();
+        var $nextPreview = $selectedPreview.next('.preview').first();
+
+        if ($nextPreview.length) {
+            $nextPreview = $selectedPreview.prev('.preview').first();
+        }
+
+        $selectedPreview.remove();
+
+        if ($nextPreview.length) {
+            $hexInput.val($nextPreview.attr('data-hex'));
+        }
+
+        toggleSaveButtons($nextPreview);
         saveState();
     });
 
     $appendButton.click(function () {
-        $previews.find('.preview.selected').removeClass('selected');
-        $previews.append(makePreviewElement($hexInput.val(), true));
-        $deleteButton.removeAttr('disabled');
-        $updateButton.removeAttr('disabled');
+        var $newPreview = makePreviewElement($hexInput.val());
+        var $selectedPreview = $previews.find('.preview.selected').first();
+
+        if ($selectedPreview.length) {
+            $selectedPreview.after($newPreview);
+        } else {
+            $previews.append($newPreview);
+        }
+
+        toggleSaveButtons($newPreview);
         saveState();
     });
 
     $updateButton.click(function () {
-        $previews.find('.preview.selected').replaceWith(makePreviewElement($hexInput.val(), true));
+        var $newPreview = makePreviewElement($hexInput.val());
+        var $selectedPreview = $previews.find('.preview.selected').first();
+
+        if ($selectedPreview.length) {
+            $selectedPreview.replaceWith($newPreview);
+        } else {
+            $previews.append($newPreview);
+        }
+
+        toggleSaveButtons($newPreview);
         saveState();
     });
 
