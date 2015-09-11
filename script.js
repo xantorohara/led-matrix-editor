@@ -147,6 +147,34 @@ $(function () {
         hexToLeds();
     }
 
+    function getHexValue() {
+        var val = $hexInput.val();
+        val = val.replace(/[^0-9a-fA-F]/g, '0');
+        val = ('0000000000000000' + val).substr(-16);
+        console.log(val);
+        return val;
+    }
+
+    function onPreviewClick() {
+        $hexInput.val($(this).attr('data-hex'));
+        processToSave($(this));
+        hexToLeds();
+    }
+
+    function processToSave($focusToPreview) {
+        $previews.find('.preview.selected').removeClass('selected');
+
+        if ($focusToPreview.length) {
+            $focusToPreview.addClass('selected');
+            $deleteButton.removeAttr('disabled');
+            $updateButton.removeAttr('disabled');
+        } else {
+            $deleteButton.attr('disabled', 'disabled');
+            $updateButton.attr('disabled', 'disabled');
+        }
+        saveState();
+    }
+
     $('#cols').append($(makeCols8()));
     $('#rows').append($(makeRows8()));
     $('#leds').append($(makeLeds8x8()));
@@ -165,14 +193,6 @@ $(function () {
         $('table.leds td').removeClass('active');
         ledsToHex();
     });
-
-    function getHexValue() {
-        var val = $hexInput.val();
-        val = val.replace(/[^0-9a-fA-F]/g, '0');
-        val = ('0000000000000000' + val).substr(-16);
-        console.log(val);
-        return val;
-    }
 
     $shiftUpButton.click(function () {
         var val = '00' + getHexValue().substr(0, 14);
@@ -198,7 +218,6 @@ $(function () {
             byte = ('0' + byte).substr(-2);
             out.push(byte);
         }
-
         val = out.join('');
         $hexInput.val(val);
         hexToLeds();
@@ -216,7 +235,6 @@ $(function () {
             byte = ('0' + byte).substr(-2);
             out.push(byte);
         }
-
         val = out.join('');
         $hexInput.val(val);
         hexToLeds();
@@ -239,26 +257,6 @@ $(function () {
     $hexInput.keyup(function () {
         hexToLeds();
     });
-
-    function onPreviewClick() {
-        $hexInput.val($(this).attr('data-hex'));
-        processToSave($(this));
-        hexToLeds();
-    }
-
-    function processToSave($focusToPreview) {
-        $previews.find('.preview.selected').removeClass('selected');
-
-        if ($focusToPreview.length) {
-            $focusToPreview.addClass('selected');
-            $deleteButton.removeAttr('disabled');
-            $updateButton.removeAttr('disabled');
-        } else {
-            $deleteButton.attr('disabled', 'disabled');
-            $updateButton.attr('disabled', 'disabled');
-        }
-        saveState();
-    }
 
     $deleteButton.click(function () {
         var $selectedPreview = $previews.find('.preview.selected').first();
