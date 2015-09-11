@@ -127,6 +127,7 @@ table.leds td.active {
 table.cols td:hover,
 table.rows td:hover {
     color: orangered;
+    font-weight: bold;
 }
 
 #previews {
