@@ -1,7 +1,7 @@
 $(function () {
     var $previews = $('#previews');
     var $hexInput = $('#input');
-    var $appendButton = $('#appendButton');
+    var $insertButton = $('#insertButton');
     var $deleteButton = $('#deleteButton');
     var $outputTextarea = $('#output');
     var $updateButton = $('#updateButton');
@@ -12,7 +12,7 @@ $(function () {
     var $shiftDownButton = $('#shiftDownButton');
     var $shiftLeftButton = $('#shiftLeftButton');
 
-    function makeCols() {
+    function makeCols8() {
         var out = ['<table class="cols"><tr>'];
         for (var i = 1; i < 9; i++) {
             out.push('<td data-col="' + i + '">' + i + '</td>');
@@ -21,7 +21,7 @@ $(function () {
         return out.join('');
     }
 
-    function makeRows() {
+    function makeRows8() {
         var out = ['<table class="rows">'];
         for (var i = 1; i < 9; i++) {
             out.push('<tr><td data-row="' + i + '">' + i + '</td></tr>');
@@ -30,7 +30,7 @@ $(function () {
         return out.join('');
     }
 
-    function makeLeds() {
+    function makeLeds8x8() {
         var out = ['<table class="leds">'];
         for (var i = 1; i < 9; i++) {
             out.push('<tr>');
@@ -65,13 +65,8 @@ $(function () {
         return out.join('');
     }
 
-    function makePreviewElement(pattern, selected) {
-        var preview = $(makePreview(pattern));
-        preview.click(onPreviewClick);
-        if (selected) {
-            preview.addClass('selected');
-        }
-        return preview;
+    function makePreviewElement(pattern) {
+        return $(makePreview(pattern)).click(onPreviewClick);
     }
 
     function ledsToHex() {
@@ -143,7 +138,7 @@ $(function () {
         var preview;
         var patterns = window.location.hash.slice(1).split('|');
         for (var i = 0; i < patterns.length; i++) {
-            preview = makePreviewElement(patterns[i], false);
+            preview = makePreviewElement(patterns[i]);
             $previews.append(preview);
         }
         preview.addClass('selected');
@@ -152,9 +147,9 @@ $(function () {
         hexToLeds();
     }
 
-    $('#cols').append($(makeCols()));
-    $('#rows').append($(makeRows()));
-    $('#leds').append($(makeLeds()));
+    $('#cols').append($(makeCols8()));
+    $('#rows').append($(makeRows8()));
+    $('#leds').append($(makeLeds8x8()));
 
     $('table.leds td').mousedown(function () {
         $(this).toggleClass('active');
@@ -247,31 +242,29 @@ $(function () {
 
     function onPreviewClick() {
         $hexInput.val($(this).attr('data-hex'));
-        toggleSaveButtons($(this));
+        processToSave($(this));
         hexToLeds();
     }
 
-    function toggleSaveButtons(focusToPreview) {
-        var $selectedPreviews = $previews.find('.preview.selected');
+    function processToSave($focusToPreview) {
+        $previews.find('.preview.selected').removeClass('selected');
 
-        if ($selectedPreviews.length) {
-            $selectedPreviews.removeClass('selected');
+        if ($focusToPreview.length) {
+            $focusToPreview.addClass('selected');
             $deleteButton.removeAttr('disabled');
             $updateButton.removeAttr('disabled');
         } else {
             $deleteButton.attr('disabled', 'disabled');
             $updateButton.attr('disabled', 'disabled');
         }
-        if (focusToPreview) {
-            focusToPreview.addClass('selected');
-        }
+        saveState();
     }
 
     $deleteButton.click(function () {
         var $selectedPreview = $previews.find('.preview.selected').first();
         var $nextPreview = $selectedPreview.next('.preview').first();
 
-        if ($nextPreview.length) {
+        if (!$nextPreview.length) {
             $nextPreview = $selectedPreview.prev('.preview').first();
         }
 
@@ -281,11 +274,12 @@ $(function () {
             $hexInput.val($nextPreview.attr('data-hex'));
         }
 
-        toggleSaveButtons($nextPreview);
-        saveState();
+        processToSave($nextPreview);
+
+        ledsToHex();
     });
 
-    $appendButton.click(function () {
+    $insertButton.click(function () {
         var $newPreview = makePreviewElement($hexInput.val());
         var $selectedPreview = $previews.find('.preview.selected').first();
 
@@ -295,8 +289,7 @@ $(function () {
             $previews.append($newPreview);
         }
 
-        toggleSaveButtons($newPreview);
-        saveState();
+        processToSave($newPreview);
     });
 
     $updateButton.click(function () {
@@ -309,8 +302,7 @@ $(function () {
             $previews.append($newPreview);
         }
 
-        toggleSaveButtons($newPreview);
-        saveState();
+        processToSave($newPreview);
     });
 
 

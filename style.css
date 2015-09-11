@@ -80,7 +80,7 @@ button {
 
 #invertButton,
 #clearButton,
-#appendButton,
+#insertButton,
 #updateButton,
 #deleteButton {
     position: absolute;
@@ -111,6 +111,7 @@ table.rows td {
     height: 25px;
     cursor: pointer;
     font-size: 17px;
+    font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
 }
 
 table.leds td {
