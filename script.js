@@ -274,7 +274,7 @@ $(function () {
 
         processToSave($nextPreview);
 
-        ledsToHex();
+        hexToLeds();
     });
 
     $insertButton.click(function () {
