@@ -131,17 +131,18 @@ table.rows td:hover {
 }
 
 #previews {
-    box-sizing: border-box;
     padding: 5px;
-    height: 180px;
+    height: 200px;
+    /*max-height: 240px;*/
     overflow-y: scroll;
+    text-align: left;
     border: solid #999 1px;
     background: #ccc linear-gradient(#ccc, #aaa);
 }
 
 #previews table.preview {
     margin: 3px;
-    float: left;
+    display: inline-block;
     background-color: #333;
     border-spacing: 2px;
     border: solid #ccc 2px;
