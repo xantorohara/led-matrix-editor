@@ -124,6 +124,8 @@ table.leds td.active {
     background: orangered radial-gradient(ellipse at center, lightcoral 0%, orangered 50%, red 100%);
 }
 
+table.cols td.hover,
+table.rows td.hover,
 table.cols td:hover,
 table.rows td:hover {
     color: orangered;
