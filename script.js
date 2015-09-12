@@ -103,8 +103,7 @@ $(function () {
     var savedHashState;
 
     function printArduinoCode(patterns) {
-        var out = ['const int PATTERNL = ', patterns.length, ';\n',
-            'const uint64_t PATTERNS[PATTERNL] = {\n'];
+        var out = ['const uint64_t IMAGES[] = {\n'];
 
         for (var i = 0; i < patterns.length; i++) {
             out.push('0x');
@@ -119,6 +118,8 @@ $(function () {
             }
         }
         out.push('\n};\n');
+        out.push('const int IMAGES_LEN = sizeof(IMAGES) / sizeof(uint64_t);\n');
+
         $outputTextarea.val(out.join(''));
     }
 
@@ -303,6 +304,13 @@ $(function () {
         processToSave($newPreview);
     });
 
+    $('#indexSelectsWhole').hover(function () {
+        $('table.cols td').addClass('hover');
+        $('table.rows td').addClass('hover');
+    }, function () {
+        $('table.cols td').removeClass('hover');
+        $('table.rows td').removeClass('hover');
+    });
 
     $(window).on('hashchange', function () {
         if (window.location.hash.slice(1) != savedHashState) {
