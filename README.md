@@ -79,4 +79,4 @@ Connect components:
 
 And enjoy:
 
-[![Video](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.mp4)](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.jpg)
+[![Video](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.jpg)](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.mp4)
