@@ -77,6 +77,6 @@ Connect components:
 ![Arduino board and LED matrix](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02145_960x540.jpg)
 
 
-And enjoy:
+See how it works and enjoy:
 
 [![Video](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.jpg)](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.mp4)
