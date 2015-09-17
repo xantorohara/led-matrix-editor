@@ -170,9 +170,10 @@ $(function () {
     }
 
     function loadState() {
+        savedHashState = window.location.hash.slice(1);
         $previews.empty();
         var preview;
-        var patterns = window.location.hash.slice(1).split('|');
+        var patterns = savedHashState.split('|');
         patterns = converter.fixPatterns(patterns);
 
         for (var i = 0; i < patterns.length; i++) {
