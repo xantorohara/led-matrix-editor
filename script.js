@@ -71,7 +71,7 @@ $(function () {
             return out.join('');
         },
         patternsToCodeBytesArray: function (patterns) {
-            var out = ['const byte IMAGES[][] = {\n'];
+            var out = ['const byte IMAGES[][8] = {\n'];
 
             for (var i = 0; i < patterns.length; i++) {
                 out.push('{\n');
@@ -90,7 +90,7 @@ $(function () {
             }
             out.pop();
             out.push('};\n');
-            out.push('const int IMAGES_LEN = sizeof(IMAGES);\n');
+            out.push('const int IMAGES_LEN = sizeof(IMAGES)/8;\n');
             return out.join('');
         },
         fixPattern: function (pattern) {
