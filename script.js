@@ -3,70 +3,111 @@ $(function () {
     var $hexInput = $('#input');
     var $insertButton = $('#insertButton');
     var $deleteButton = $('#deleteButton');
-    var $outputTextarea = $('#output');
     var $updateButton = $('#updateButton');
-    var $invertButton = $('#invertButton');
-    var $clearButton = $('#clearButton');
-    var $shiftUpButton = $('#shiftUpButton');
-    var $shiftRightButton = $('#shiftRightButton');
-    var $shiftDownButton = $('#shiftDownButton');
-    var $shiftLeftButton = $('#shiftLeftButton');
 
-    function makeCols8() {
-        var out = ['<table class="cols"><tr>'];
-        for (var i = 1; i < 9; i++) {
-            out.push('<td data-col="' + i + '">' + i + '</td>');
-        }
-        out.push('</tr></table>');
-        return out.join('');
-    }
-
-    function makeRows8() {
-        var out = ['<table class="rows">'];
-        for (var i = 1; i < 9; i++) {
-            out.push('<tr><td data-row="' + i + '">' + i + '</td></tr>');
-        }
-        out.push('</table>');
-        return out.join('');
-    }
-
-    function makeLeds8x8() {
-        var out = ['<table class="leds">'];
-        for (var i = 1; i < 9; i++) {
-            out.push('<tr>');
-            for (var j = 1; j < 9; j++) {
-                out.push('<td data-row="' + i + '" data-col="' + j + '"></td>');
+    var generator = {
+        tableCols: function () {
+            var out = ['<table class="cols"><tr>'];
+            for (var i = 1; i < 9; i++) {
+                out.push('<td data-col="' + i + '">' + i + '</td>');
             }
-            out.push('</tr>');
-        }
-        out.push('</table>');
-        return out.join('');
-    }
-
-    function makePreview(pattern) {
-        pattern = ('0000000000000000' + pattern).substr(-16);
-
-        var out = ['<table class="preview" data-hex="' + pattern + '">'];
-        for (var i = 1; i < 9; i++) {
-            var byte = pattern.substr(-2 * i, 2);
-            byte = parseInt(byte, 16);
-
-            out.push('<tr>');
-            for (var j = 0; j < 8; j++) {
-                if ((byte & 1 << j)) {
-                    out.push('<td class="active"></td>');
-                } else {
-                    out.push('<td></td>');
+            out.push('</tr></table>');
+            return out.join('');
+        },
+        tableRows: function () {
+            var out = ['<table class="rows">'];
+            for (var i = 1; i < 9; i++) {
+                out.push('<tr><td data-row="' + i + '">' + i + '</td></tr>');
+            }
+            out.push('</table>');
+            return out.join('');
+        },
+        tableLeds: function () {
+            var out = ['<table class="leds">'];
+            for (var i = 1; i < 9; i++) {
+                out.push('<tr>');
+                for (var j = 1; j < 9; j++) {
+                    out.push('<td data-row="' + i + '" data-col="' + j + '"></td>');
                 }
+                out.push('</tr>');
             }
-            out.push('</tr>');
+            out.push('</table>');
+            return out.join('');
         }
-        out.push('</table>');
-        return out.join('');
-    }
+    };
+
+    var converter = {
+        patternToPreview: function (pattern) {
+            var out = ['<table class="preview" data-hex="' + pattern + '">'];
+            for (var i = 1; i < 9; i++) {
+                var byte = pattern.substr(-2 * i, 2);
+                byte = parseInt(byte, 16);
+
+                out.push('<tr>');
+                for (var j = 0; j < 8; j++) {
+                    if ((byte & 1 << j)) {
+                        out.push('<td class="active"></td>');
+                    } else {
+                        out.push('<td></td>');
+                    }
+                }
+                out.push('</tr>');
+            }
+            out.push('</table>');
+            return out.join('');
+        },
+        patternsToCodeUint64Array: function (patterns) {
+            var out = ['const uint64_t IMAGES[] = {\n'];
+
+            for (var i = 0; i < patterns.length; i++) {
+                out.push('  0x');
+                out.push(patterns[i]);
+                out.push(',\n');
+            }
+            out.pop();
+            out.push('\n};\n');
+            out.push('const int IMAGES_LEN = sizeof(IMAGES)/sizeof(uint64_t);\n');
+
+            return out.join('');
+        },
+        patternsToCodeBytesArray: function (patterns) {
+            var out = ['const byte IMAGES[][] = {\n'];
+
+            for (var i = 0; i < patterns.length; i++) {
+                out.push('{\n');
+                for (var j = 7; j >= 0; j--) {
+                    var byte = patterns[i].substr(2 * j, 2);
+                    byte = parseInt(byte, 16).toString(2);
+                    byte = ('00000000' + byte).substr(-8);
+                    byte = byte.split('').reverse().join('');
+                    out.push('  B');
+                    out.push(byte);
+                    out.push(',\n');
+                }
+                out.pop();
+                out.push('\n}');
+                out.push(',');
+            }
+            out.pop();
+            out.push('};\n');
+            out.push('const int IMAGES_LEN = sizeof(IMAGES);\n');
+            return out.join('');
+        },
+        fixPattern: function (pattern) {
+            pattern = pattern.replace(/[^0-9a-fA-F]/g, '0');
+            return ('0000000000000000' + pattern).substr(-16);
+        },
+        fixPatterns: function (patterns) {
+            for (var i = 0; i < patterns.length; i++) {
+                patterns[i] = converter.fixPattern(patterns[i]);
+            }
+            return patterns;
+        }
+    };
 
     function makePreviewElement(pattern) {
-        return $(makePreview(pattern)).click(onPreviewClick);
+        pattern = converter.fixPattern(pattern);
+        return $(converter.patternToPreview(pattern)).click(onPreviewClick);
     }
 
     function ledsToHex() {
@@ -86,8 +127,8 @@ $(function () {
         $hexInput.val(out.join(''));
     }
 
-    function hexToLeds() {
-        var val = getHexValue();
+    function hexInputToLeds() {
+        var val = getInputHexValue();
 
         for (var i = 1; i < 9; i++) {
             var byte = val.substr(-2 * i, 2);
@@ -103,41 +144,37 @@ $(function () {
     var savedHashState;
 
     function printArduinoCode(patterns) {
-        var out = ['const uint64_t IMAGES[] = {\n'];
-
-        for (var i = 0; i < patterns.length; i++) {
-            out.push('0x');
-            out.push(patterns[i]);
-
-            if (i < patterns.length - 1) {
-                if (i % 4 == 3) {
-                    out.push(',\n');
-                } else {
-                    out.push(', ');
-                }
+        if (patterns.length) {
+            var code;
+            if ($('#imagesAsByteArrays').prop("checked")) {
+                code = converter.patternsToCodeBytesArray(patterns);
+            } else {
+                code = converter.patternsToCodeUint64Array(patterns);
             }
+            $('#output').val(code);
         }
-        out.push('\n};\n');
-        out.push('const int IMAGES_LEN = sizeof(IMAGES) / sizeof(uint64_t);\n');
-
-        $outputTextarea.val(out.join(''));
     }
 
-    function saveState() {
+    function previewsToPatterns() {
         var out = [];
         $previews.find('.preview').each(function () {
             out.push($(this).attr('data-hex'));
         });
+        return out;
+    }
 
-        window.location.hash = savedHashState = out.join('|');
-
-        printArduinoCode(out);
+    function saveState() {
+        var patterns = previewsToPatterns();
+        printArduinoCode(patterns);
+        window.location.hash = savedHashState = patterns.join('|');
     }
 
     function loadState() {
         $previews.empty();
         var preview;
         var patterns = window.location.hash.slice(1).split('|');
+        patterns = converter.fixPatterns(patterns);
+
         for (var i = 0; i < patterns.length; i++) {
             preview = makePreviewElement(patterns[i]);
             $previews.append(preview);
@@ -145,21 +182,17 @@ $(function () {
         preview.addClass('selected');
         $hexInput.val(preview.attr('data-hex'));
         printArduinoCode(patterns);
-        hexToLeds();
+        hexInputToLeds();
     }
 
-    function getHexValue() {
-        var val = $hexInput.val();
-        val = val.replace(/[^0-9a-fA-F]/g, '0');
-        val = ('0000000000000000' + val).substr(-16);
-        console.log(val);
-        return val;
+    function getInputHexValue() {
+        return converter.fixPattern($hexInput.val());
     }
 
     function onPreviewClick() {
         $hexInput.val($(this).attr('data-hex'));
         processToSave($(this));
-        hexToLeds();
+        hexInputToLeds();
     }
 
     function processToSave($focusToPreview) {
@@ -176,39 +209,39 @@ $(function () {
         saveState();
     }
 
-    $('#cols').append($(makeCols8()));
-    $('#rows').append($(makeRows8()));
-    $('#leds').append($(makeLeds8x8()));
+    $('#cols').append($(generator.tableCols()));
+    $('#rows').append($(generator.tableRows()));
+    $('#leds').append($(generator.tableLeds()));
 
     $('table.leds td').mousedown(function () {
         $(this).toggleClass('active');
         ledsToHex();
     });
 
-    $invertButton.click(function () {
+    $('#invertButton').click(function () {
         $('table.leds td').toggleClass('active');
         ledsToHex();
     });
 
-    $clearButton.click(function () {
+    $('#clearButton').click(function () {
         $('table.leds td').removeClass('active');
         ledsToHex();
     });
 
-    $shiftUpButton.click(function () {
-        var val = '00' + getHexValue().substr(0, 14);
+    $('#shiftUpButton').click(function () {
+        var val = '00' + getInputHexValue().substr(0, 14);
         $hexInput.val(val);
-        hexToLeds();
+        hexInputToLeds();
     });
 
-    $shiftDownButton.click(function () {
-        var val = getHexValue().substr(2, 14) + '00';
+    $('#shiftDownButton').click(function () {
+        var val = getInputHexValue().substr(2, 14) + '00';
         $hexInput.val(val);
-        hexToLeds();
+        hexInputToLeds();
     });
 
-    $shiftRightButton.click(function () {
-        var val = getHexValue();
+    $('#shiftRightButton').click(function () {
+        var val = getInputHexValue();
 
         var out = [];
         for (var i = 0; i < 8; i++) {
@@ -221,11 +254,11 @@ $(function () {
         }
         val = out.join('');
         $hexInput.val(val);
-        hexToLeds();
+        hexInputToLeds();
     });
 
-    $shiftLeftButton.click(function () {
-        var val = getHexValue();
+    $('#shiftLeftButton').click(function () {
+        var val = getInputHexValue();
 
         var out = [];
         for (var i = 0; i < 8; i++) {
@@ -238,7 +271,7 @@ $(function () {
         }
         val = out.join('');
         $hexInput.val(val);
-        hexToLeds();
+        hexInputToLeds();
     });
 
     $('table.cols td').mousedown(function () {
@@ -256,7 +289,7 @@ $(function () {
     });
 
     $hexInput.keyup(function () {
-        hexToLeds();
+        hexInputToLeds();
     });
 
     $deleteButton.click(function () {
@@ -275,11 +308,11 @@ $(function () {
 
         processToSave($nextPreview);
 
-        hexToLeds();
+        hexInputToLeds();
     });
 
     $insertButton.click(function () {
-        var $newPreview = makePreviewElement($hexInput.val());
+        var $newPreview = makePreviewElement(getInputHexValue());
         var $selectedPreview = $previews.find('.preview.selected').first();
 
         if ($selectedPreview.length) {
@@ -292,7 +325,7 @@ $(function () {
     });
 
     $updateButton.click(function () {
-        var $newPreview = makePreviewElement($hexInput.val());
+        var $newPreview = makePreviewElement(getInputHexValue());
         var $selectedPreview = $previews.find('.preview.selected').first();
 
         if ($selectedPreview.length) {
@@ -302,6 +335,11 @@ $(function () {
         }
 
         processToSave($newPreview);
+    });
+
+    $('#imagesAsByteArrays').change(function () {
+        var patterns = previewsToPatterns();
+        printArduinoCode(patterns);
     });
 
     $('#indexSelectsWhole').hover(function () {

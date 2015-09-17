@@ -169,7 +169,6 @@ table.rows td:hover {
 #output {
     resize: none;
     padding: 5px;
-    white-space: normal;
     height: 350px;
     overflow-y: scroll;
 }
