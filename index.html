@@ -49,9 +49,14 @@
 </div>
 
 <div style="float: right; margin: 0 0 10px 10px;">
-    <h2>Arduino/C code:</h2>
-    <textarea id="output" spellcheck="false" cols="40"></textarea>
+    <label style="float: right;padding: 5px;">
+        <input type="checkbox" id="imagesAsByteArrays">
+        as byte arrays
+    </label>
 
+    <h2>Arduino/C code: </h2>
+
+    <textarea id="output" spellcheck="false" cols="32"></textarea>
 </div>
 
 <div style="display: inline-block; text-align: center;">
@@ -106,7 +111,7 @@
     Use Drag-and-Drop to reorder images ↓
 </p>
 
-<div id="previews"></div>
+<div id="previews" style="clear: both"></div>
 
 
 <!-- Yandex.Metrika counter -->
