@@ -1,74 +1,16 @@
-* {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    user-select: none;
-    -webkit-user-select: none;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 15px;
-}
-
-input, td, textarea, h1, h2 {
-    font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
-}
-
 html, body {
     min-height: 100%;
 }
 
 body {
     background: #ccc linear-gradient(#eee, #ccc);
-    padding: 5px;
-    text-align: center;
 }
 
-h1, h2, ul, p {
-    padding: 5px;
-    text-align: left;
-}
-
-h1 {
-    font-size: 30px;
-}
-
-h2 {
-    font-size: 20px;
-}
-
-ul {
-    list-style: inside;
-}
-
-li {
-    margin-bottom: 5px;
-}
-
-li, a, button {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-a:visited {
-    color: royalblue;
-}
-
-.note {
-    padding: 5px;
-    font-size: 13px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-button {
-    box-sizing: border-box;
-    font-size: 13px;
-    height: 30px;
+#input,
+#output,
+table.cols td,
+table.rows td {
+    font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
 }
 
 #shiftUpButton,
@@ -77,6 +19,7 @@ button {
 #shiftLeftButton {
     position: absolute;
     width: 30px;
+    height: 30px;
 }
 
 #invertButton,
@@ -86,11 +29,13 @@ button {
 #deleteButton {
     position: absolute;
     width: 70px;
+    height: 30px;
 }
 
 #input {
     text-align: center;
-    width: 160px;
+    width: 200px;
+    height: 30px;
     padding: 5px;
 }
 
@@ -98,6 +43,7 @@ table.leds,
 table.cols,
 table.rows {
     border-spacing: 5px;
+    border-collapse: separate;
 }
 
 table.leds {
@@ -112,7 +58,6 @@ table.rows td {
     height: 25px;
     cursor: pointer;
     font-size: 17px;
-    font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
 }
 
 table.leds td {
@@ -136,7 +81,6 @@ table.rows td:hover {
 #previews {
     padding: 5px;
     height: 200px;
-    /*max-height: 240px;*/
     overflow-y: scroll;
     text-align: left;
     border: solid #999 1px;
@@ -148,6 +92,7 @@ table.rows td:hover {
     display: inline-block;
     background-color: #333;
     border-spacing: 2px;
+    border-collapse: separate;
     border: solid #ccc 2px;
 }
 
@@ -170,10 +115,16 @@ table.rows td:hover {
 #output {
     resize: none;
     padding: 5px;
-    height: 350px;
+    height: 300px;
     overflow-y: scroll;
 }
 
+@media only screen and (min-height: 900px) {
+    #previews {
+        height: 400px;
+    }
+}
+
 .debug {
-    /*border: dashed red 1px;*/
+    border: dashed #ff0000 1px;
 }
