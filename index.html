@@ -8,172 +8,203 @@
     <meta name="description" content="Online editor: create images for LED matrix">
     <meta name="author" content="Xantorohara"/>
 
-    <link rel="stylesheet" type="text/css" href="style.css?20150918">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" type="text/css" href="style.css?20150924">
     <link rel="icon" type="image/png" href="icon.png "/>
+
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <script src="script.js?20150918"></script>
 </head>
 
 <body>
-
-<div style="float: left; margin: 0 10px 10px 0;">
-    <h1>LED Matrix 8x8</h1>
-
-    <h2>Examples</h2>
-    <ul>
-        <li><a href="#">Blank</a></li>
-        <li>
-            <a href="#0000000000000000|00180018183c3c18|0000000000003636|0036367f367f3636|000c1f301e033e0c|0063660c18336300|006e333b6e1c361c|0000000000030606|00180c0606060c18|00060c1818180c06|0000663cff3c6600|00000c0c3f0c0c00|060c0c0000000000|000000003f000000|000c0c0000000000|000103060c183060|003e676f7b73633e|003f0c0c0c0c0e0c|003f33061c30331e|001e33301c30331e|0078307f33363c38|001e3330301f033f|001e33331f03061c|000c0c0c1830333f|001e33331e33331e|000e18303e33331e|000c0c00000c0c00|060c0c00000c0c00|00180c0603060c18|00003f00003f0000|00060c1830180c06|000c000c1830331e|001e037b7b7b633e|0033333f33331e0c|003f66663e66663f|003c66030303663c|001f36666666361f|007f46161e16467f|000f06161e16467f|007c66730303663c|003333333f333333|001e0c0c0c0c0c1e|001e333330303078|006766361e366667|007f66460606060f|0063636b7f7f7763|006363737b6f6763|001c36636363361c|000f06063e66663f|00381e3b3333331e|006766363e66663f|001e33380e07331e|001e0c0c0c0c2d3f|003f333333333333|000c1e3333333333|0063777f6b636363|0063361c1c366363|001e0c0c1e333333|007f664c1831637f|001e06060606061e|00406030180c0603|001e18181818181e|0000000063361c08|ff00000000000000|0000000000180c0c|006e333e301e0000|003b66663e060607|001e3303331e0000|006e33333e303038|001e033f331e0000|000f06060f06361c|1f303e33336e0000|006766666e360607|001e0c0c0c0e000c|1e33333030300030|0067361e36660607|001e0c0c0c0c0c0e|00636b7f7f330000|00333333331f0000|001e3333331e0000|0f063e66663b0000|78303e33336e0000|000f06666e3b0000|001f301e033e0000|00182c0c0c3e0c08|006e333333330000|000c1e3333330000|00367f7f6b630000|0063361c36630000|1f303e3333330000|003f260c193f0000|00380c0c070c0c38|0018181800181818|00070c0c380c0c07|0000000000003b6e">
-                Font 8x8
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                LED Matrix Editor 8x8
             </a>
-        </li>
-        <li>
-            <a href="#0000000000000000|0018181818001818|18187e03037e1818|003f67060f26361c|00633e363e630000|0c0c3f0c3f1e3333|0018181800181818|1e331c36361cc67c|0000000000000033|3c4299858599423c|000000007c36363c|0000cc663366cc00|000030303f000000|0000000000000000|3c42a59da59d423c|000000000000007e|000000001c36361c|007e0018187e1818|0000003c0c18301c|0000001c3018301c|0000000000000c18|03063e6666660000|00d8d8d8dedbdbfe|0000001818000000|1e30180000000000|000000001c080c08|000000001c36361c|00003366cc663300|03f3f6ecbd3363c3|f03366cc7b3363c3|80e6acdbb463c403|001e3303060c000c|00637f63361c0007|00637f63361c0070|00637f633e00361c|00637f633e003b6e|0063637f63361c63|00333f331e000c0c|007333337f33367c|1e30181e3303331e|003f061e063f0007|003f061e063f0038|003f061e063f120c|003f061e063f0036|001e0c0c0c1e0007|001e0c0c0c1e0038|001e0c0c1e00120c|001e0c0c0c1e0033|003f66666f6f663f|00333b3f3733003f|00183c663c18000e|00183c663c180070|00183c663c18663c|003e63633e003b6e|00183c66663c18c3|0000361c081c3600|001d366f7b73365c|003c66666666000e|003c666666660070|003c66666600663c|001e333333330033|0018183c66660070|0f063e66663e060f|03031f331f331e00|007e333e301e0007|007e333e301e0038|00fc667c603cc37e|007e333e301e3b6e|007e333e301e0033|007e333e301e0c0c|00fe33fe30fe0000|1c301e03031e0000|001e033f331e0007|001e033f331e0038|003c067e663cc37e|001e033f331e0033|001e0c0c0c0e0007|001e0c0c0c0e001c|003c1818181c633e|001e0c0c0c0e0033|001e333e301b0e1b|003333331f001f00|001e33331e000700|001e33331e003800|001e33331e00331e|001e33331e003b6e|001e33331e003300|001818007e001818|063c6e7e763c6000|007e333333000700|007e333333003800|007e33333300331e|007e333333003300|1f303e3333003800|00063e663e060000|1f303e3333003300">
-                Latin ext
-            </a>
-        </li>
-        <li>
-            <a href="#000000ff00000000|000000ffff000000|0808080808080808|1818181818181818|000000bb00000000|000000bbbb000000|0808000808080008|1818001818180018|0000005500000000|0000005555000000|0800080008000800|1800180018001800|080808f800000000|080808f8f8000000|181818f800000000|181818f8f8000000|0808080f00000000|0808080f0f000000|1818181f00000000|1818181f1f000000|000000f808080808|000000f8f8080808|000000f818181818|000000f8f8181818|0000000f08080808|0000000f0f080808|0000001f18181818|0000001f1f181818|080808f808080808|080808f8f8080808|080808f818181818|181818f808080808|181818f818181818|080808f8f8181818|181818f8f8080808|181818f8f8181818|0808080f08080808|0808080f0f080808|0808081f18181818|1818181f08080808|1818181f18181818|0808081f1f181818|1818181f1f080808|1818181f1f181818|080808ff00000000|080808ff0f000000|080808fff8000000|080808ffff000000|181818ff00000000|181818ff1f000000|181818fff8000000|181818ffff000000|000000ff08080808|000000ff0f080808|000000fff8080808|000000ffff080808|000000ff18181818|000000ff1f181818|000000fff8181818|000000ffff181818|080808ff08080808|080808ff0f080808|080808fff8080808|080808ffff080808|080808ff18181818|181818ff08080808|181818ff18181818|080808ff1f181818|080808fff8181818|181818ff1f080808|181818fff8080808|181818ffff080808|080808ffff181818|181818fff8181818|181818ff1f181818|181818ffff181818|000000e700000000|000000e7e7000000|0808080000080808|1818180000181818|0000ff00ff000000|1414141414141414|0808f808f8000000|141414fc00000000|1414f404fc000000|08080f080f000000|1414141f00000000|141417101f000000|0000f808f8080808|000000fc14141414|0000fc04f4141414|00000f080f080808|0000001f14141414|00001f1017141414|0808f808f8080808|141414f414141414|1414f404f4141414|08080f080f080808|1414141714141414|1414171017141414|0808ff00ff000000|141414ff00000000|1414f700ff000000|0000ff00ff080808|000000ff14141414|0000ff00f7141414|0808ff08ff080808|141414ff14141414|1414f700f7141414|080810e000000000|0808040300000000|0000000304080808|000000e010080808|0102040810204080|8040201008040201|8142241818244281|0000000f00000000|0000000008080808|000000f800000000|0808080800000000|0000000f0f000000|0000000018181818|000000f8f8000000|1818181800000000|000000fff8000000|1818181808080808|000000ff0f000000|0808080818181818">
-                Boxes
-            </a>
-        </li>
-        <li>
-            <a href="#00000000ffffffff|ff00000000000000|ffff000000000000|ffffff0000000000|ffffffff00000000|ffffffffff000000|ffffffffffff0000|ffffffffffffff00|ffffffffffffffff|7f7f7f7f7f7f7f7f|3f3f3f3f3f3f3f3f|1f1f1f1f1f1f1f1f|0f0f0f0f0f0f0f0f|0707070707070707|0303030303030303|0101010101010101|f0f0f0f0f0f0f0f0|00aa005500aa0055|aa55aa55aa55aa55|55ffaaff55ffaaff|00000000000000ff|8080808080808080|0f0f0f0f00000000|f0f0f0f000000000|000000000f0f0f0f|ffffffff0f0f0f0f|f0f0f0f00f0f0f0f|0f0f0f0fffffffff|f0f0f0f0ffffffff|00000000f0f0f0f0|0f0f0f0ff0f0f0f0|fffffffff0f0f0f0">
-                Blocks
-            </a>
-        </li>
-        <li>
-            <a href="#1c08080808080c08|3e0408102020221c|1c2220201820221c|20203e2224283020|1c2220201e02023e|1c2222221e02221c|040404081020203e|1c2222221c22221c|1c22203c2222221c|1c2222222222221c">
-                Digits
-            </a>
-        </li>
-        <li>
-            <a href="#5554545050404000|3f21212121212121|3f212d2121212121|3f212d212d212121|3f212d212d212d21|3f212d2d2d212121|3f212d2d2d2d2d2d|00040a1120408000|081c3e7f1c1c1c1c|0010307fff7f3010|1c1c1c1c7f3e1c08|00080cfefffe0c08">
-                Icons
-            </a>
-        </li>
+        </div>
+        <p class="navbar-text pull-right">
+            &copy; 2015 <a href="mailto:xantorohara@gmail.com" class="navbar-link">Xantorohara</a>
+        </p>
 
-        <li>
-            <a href="#3e2222223e3e0808|3e22223e3e2a0808|3e223e3e2a2a0808|be3e3e2a2a2a0808|be223e3e2a2a0808|be22223e3e2a0808|be2222223e3e0808|be22223e3e2a0808|be223e3e2a2a0808|bebe3e2a2a2a0808|bea23e3e2a2a0808|bea2223e3e2a0808|bea222223e3e0808|bea2223e3e2a0808|bea23e3e2a2a0808|bebebe2a2a2a0808|bea2be3e2a2a0808|bea2a23e3e2a0808|bea2a2223e3e0808|bea2a23e3e2a0808|bea2be3e2a2a0808|bebebeaa2a2a0808|bea2bebe2a2a0808|bea2a2be3e2a0808|bea2a2a23e3e0808|bea2a2be3e2a0808|bea2bebe2a2a0808|bebebeaaaa2a0808|bea2bebeaa2a0808|bea2a2bebe2a0808|bea2a2a2be3e0808|bea2a2bebe2a0808|bea2bebeaa2a0808|bebebeaaaaaa0808|bea2bebeaaaa0808|bea2a2bebeaa0808|bea2a2a2bebe0808|bea2a2a2a2be1c08|bea2a2a2a2a21c1c|bea2a2a2a222001c|bea2a2a22222001c|bea2a2222222001c|bea222222222001c|be2222222222001c|3e2222222222001c|3e2222222222001c|3e22222222221c1c|3e222222223e1c08">
-                Motor-pump animation
-            </a>
-        </li>
-    </ul>
-
-    <h2>Articles</h2>
-    <ul>
-        <li>
-            <a href="http://xantorohara.blogspot.com/2015/09/arduino-led-matrix-editor.html" target="_blank">
-                Sample: uint64_t
-            </a>
-        </li>
-        <li>
-            <a href="http://xantorohara.blogspot.com/2015/09/arduino-led-matrix-state-as-array-of.html" target="_blank">
-                Sample: byte[8]
-            </a>
-        </li>
-    </ul>
-</div>
-
-<div style="float: right; margin: 0 0 10px 10px;">
-    <label style="float: right;padding: 5px;">
-        <input type="checkbox" id="imagesAsByteArrays">
-        as byte arrays
-    </label>
-
-    <h2>Arduino/C code: </h2>
-
-    <textarea id="output" spellcheck="false" cols="32"></textarea>
-</div>
-
-<div style="display: inline-block; text-align: center;">
-    <table>
-        <tr>
-            <td></td>
-            <td id="cols"></td>
-            <td id="indexSelectsWhole" class="note" style="padding-left: 30px; cursor: pointer;">
-                ← Index select whole row or column
-            </td>
-        </tr>
-        <tr>
-            <td id="rows"></td>
-            <td id="leds"></td>
-            <td style="padding-left: 30px;">
-                <div style="display: inline-block; position: relative; width: 190px; height: 110px;">
-                    <button id="shiftUpButton" style="top:0; left:40px;">↑</button>
-                    <button id="shiftRightButton" style="top:40px; left:80px;">→</button>
-                    <button id="shiftDownButton" style="top:80px; left:40px;">↓</button>
-                    <button id="shiftLeftButton" style="top:40px; left:0;">←</button>
-                    <button id="invertButton" style="top: 0; left: 120px;">Invert</button>
-                    <button id="clearButton" style="top: 80px; left: 120px;">Clear</button>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="text-align: center; padding: 20px;">
-                <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                <div style="display: inline-block; position: relative; width: 230px; height: 30px;">
-                    <button id="insertButton" style="top:0; left: 0;">Insert</button>
-                    <button id="updateButton" style="top:0; left: 80px;">Update</button>
-                    <button id="deleteButton" style="top:0; left: 160px;">Delete</button>
-                </div>
-            </td>
-            <td class="note" style="padding-left: 30px">
+        <p class="navbar-text pull-right">
+            <small>
+                <span class="glyphicon glyphicon-hand-up"></span>
                 Use CTRL+D to save as a bookmark
-            </td>
-        </tr>
-    </table>
+            </small>
+        </p>
+    </div>
+</nav>
 
-</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6 col-md-3 debug">
+            <h3>Examples</h3>
+            <ul>
+                <li><a href="#">Blank</a></li>
+                <li>
+                    <a href="#0000000000000000|00180018183c3c18|0000000000003636|0036367f367f3636|000c1f301e033e0c|0063660c18336300|006e333b6e1c361c|0000000000030606|00180c0606060c18|00060c1818180c06|0000663cff3c6600|00000c0c3f0c0c00|060c0c0000000000|000000003f000000|000c0c0000000000|000103060c183060|003e676f7b73633e|003f0c0c0c0c0e0c|003f33061c30331e|001e33301c30331e|0078307f33363c38|001e3330301f033f|001e33331f03061c|000c0c0c1830333f|001e33331e33331e|000e18303e33331e|000c0c00000c0c00|060c0c00000c0c00|00180c0603060c18|00003f00003f0000|00060c1830180c06|000c000c1830331e|001e037b7b7b633e|0033333f33331e0c|003f66663e66663f|003c66030303663c|001f36666666361f|007f46161e16467f|000f06161e16467f|007c66730303663c|003333333f333333|001e0c0c0c0c0c1e|001e333330303078|006766361e366667|007f66460606060f|0063636b7f7f7763|006363737b6f6763|001c36636363361c|000f06063e66663f|00381e3b3333331e|006766363e66663f|001e33380e07331e|001e0c0c0c0c2d3f|003f333333333333|000c1e3333333333|0063777f6b636363|0063361c1c366363|001e0c0c1e333333|007f664c1831637f|001e06060606061e|00406030180c0603|001e18181818181e|0000000063361c08|ff00000000000000|0000000000180c0c|006e333e301e0000|003b66663e060607|001e3303331e0000|006e33333e303038|001e033f331e0000|000f06060f06361c|1f303e33336e0000|006766666e360607|001e0c0c0c0e000c|1e33333030300030|0067361e36660607|001e0c0c0c0c0c0e|00636b7f7f330000|00333333331f0000|001e3333331e0000|0f063e66663b0000|78303e33336e0000|000f06666e3b0000|001f301e033e0000|00182c0c0c3e0c08|006e333333330000|000c1e3333330000|00367f7f6b630000|0063361c36630000|1f303e3333330000|003f260c193f0000|00380c0c070c0c38|0018181800181818|00070c0c380c0c07|0000000000003b6e">
+                        Font 8x8
+                    </a>
+                </li>
+                <li>
+                    <a href="#0000000000000000|0018181818001818|18187e03037e1818|003f67060f26361c|00633e363e630000|0c0c3f0c3f1e3333|0018181800181818|1e331c36361cc67c|0000000000000033|3c4299858599423c|000000007c36363c|0000cc663366cc00|000030303f000000|0000000000000000|3c42a59da59d423c|000000000000007e|000000001c36361c|007e0018187e1818|0000003c0c18301c|0000001c3018301c|0000000000000c18|03063e6666660000|00d8d8d8dedbdbfe|0000001818000000|1e30180000000000|000000001c080c08|000000001c36361c|00003366cc663300|03f3f6ecbd3363c3|f03366cc7b3363c3|80e6acdbb463c403|001e3303060c000c|00637f63361c0007|00637f63361c0070|00637f633e00361c|00637f633e003b6e|0063637f63361c63|00333f331e000c0c|007333337f33367c|1e30181e3303331e|003f061e063f0007|003f061e063f0038|003f061e063f120c|003f061e063f0036|001e0c0c0c1e0007|001e0c0c0c1e0038|001e0c0c1e00120c|001e0c0c0c1e0033|003f66666f6f663f|00333b3f3733003f|00183c663c18000e|00183c663c180070|00183c663c18663c|003e63633e003b6e|00183c66663c18c3|0000361c081c3600|001d366f7b73365c|003c66666666000e|003c666666660070|003c66666600663c|001e333333330033|0018183c66660070|0f063e66663e060f|03031f331f331e00|007e333e301e0007|007e333e301e0038|00fc667c603cc37e|007e333e301e3b6e|007e333e301e0033|007e333e301e0c0c|00fe33fe30fe0000|1c301e03031e0000|001e033f331e0007|001e033f331e0038|003c067e663cc37e|001e033f331e0033|001e0c0c0c0e0007|001e0c0c0c0e001c|003c1818181c633e|001e0c0c0c0e0033|001e333e301b0e1b|003333331f001f00|001e33331e000700|001e33331e003800|001e33331e00331e|001e33331e003b6e|001e33331e003300|001818007e001818|063c6e7e763c6000|007e333333000700|007e333333003800|007e33333300331e|007e333333003300|1f303e3333003800|00063e663e060000|1f303e3333003300">
+                        Latin ext
+                    </a>
+                </li>
+                <li>
+                    <a href="#000000ff00000000|000000ffff000000|0808080808080808|1818181818181818|000000bb00000000|000000bbbb000000|0808000808080008|1818001818180018|0000005500000000|0000005555000000|0800080008000800|1800180018001800|080808f800000000|080808f8f8000000|181818f800000000|181818f8f8000000|0808080f00000000|0808080f0f000000|1818181f00000000|1818181f1f000000|000000f808080808|000000f8f8080808|000000f818181818|000000f8f8181818|0000000f08080808|0000000f0f080808|0000001f18181818|0000001f1f181818|080808f808080808|080808f8f8080808|080808f818181818|181818f808080808|181818f818181818|080808f8f8181818|181818f8f8080808|181818f8f8181818|0808080f08080808|0808080f0f080808|0808081f18181818|1818181f08080808|1818181f18181818|0808081f1f181818|1818181f1f080808|1818181f1f181818|080808ff00000000|080808ff0f000000|080808fff8000000|080808ffff000000|181818ff00000000|181818ff1f000000|181818fff8000000|181818ffff000000|000000ff08080808|000000ff0f080808|000000fff8080808|000000ffff080808|000000ff18181818|000000ff1f181818|000000fff8181818|000000ffff181818|080808ff08080808|080808ff0f080808|080808fff8080808|080808ffff080808|080808ff18181818|181818ff08080808|181818ff18181818|080808ff1f181818|080808fff8181818|181818ff1f080808|181818fff8080808|181818ffff080808|080808ffff181818|181818fff8181818|181818ff1f181818|181818ffff181818|000000e700000000|000000e7e7000000|0808080000080808|1818180000181818|0000ff00ff000000|1414141414141414|0808f808f8000000|141414fc00000000|1414f404fc000000|08080f080f000000|1414141f00000000|141417101f000000|0000f808f8080808|000000fc14141414|0000fc04f4141414|00000f080f080808|0000001f14141414|00001f1017141414|0808f808f8080808|141414f414141414|1414f404f4141414|08080f080f080808|1414141714141414|1414171017141414|0808ff00ff000000|141414ff00000000|1414f700ff000000|0000ff00ff080808|000000ff14141414|0000ff00f7141414|0808ff08ff080808|141414ff14141414|1414f700f7141414|080810e000000000|0808040300000000|0000000304080808|000000e010080808|0102040810204080|8040201008040201|8142241818244281|0000000f00000000|0000000008080808|000000f800000000|0808080800000000|0000000f0f000000|0000000018181818|000000f8f8000000|1818181800000000|000000fff8000000|1818181808080808|000000ff0f000000|0808080818181818">
+                        Boxes
+                    </a>
+                </li>
+                <li>
+                    <a href="#00000000ffffffff|ff00000000000000|ffff000000000000|ffffff0000000000|ffffffff00000000|ffffffffff000000|ffffffffffff0000|ffffffffffffff00|ffffffffffffffff|7f7f7f7f7f7f7f7f|3f3f3f3f3f3f3f3f|1f1f1f1f1f1f1f1f|0f0f0f0f0f0f0f0f|0707070707070707|0303030303030303|0101010101010101|f0f0f0f0f0f0f0f0|00aa005500aa0055|aa55aa55aa55aa55|55ffaaff55ffaaff|00000000000000ff|8080808080808080|0f0f0f0f00000000|f0f0f0f000000000|000000000f0f0f0f|ffffffff0f0f0f0f|f0f0f0f00f0f0f0f|0f0f0f0fffffffff|f0f0f0f0ffffffff|00000000f0f0f0f0|0f0f0f0ff0f0f0f0|fffffffff0f0f0f0">
+                        Blocks
+                    </a>
+                </li>
+                <li>
+                    <a href="#1c08080808080c08|3e0408102020221c|1c2220201820221c|20203e2224283020|1c2220201e02023e|1c2222221e02221c|040404081020203e|1c2222221c22221c|1c22203c2222221c|1c2222222222221c">
+                        Digits
+                    </a>
+                </li>
+                <li>
+                    <a href="#5554545050404000|3f21212121212121|3f212d2121212121|3f212d212d212121|3f212d212d212d21|3f212d2d2d212121|3f212d2d2d2d2d2d|00040a1120408000|081c3e7f1c1c1c1c|0010307fff7f3010|1c1c1c1c7f3e1c08|00080cfefffe0c08">
+                        Icons
+                    </a>
+                </li>
+                <li>
+                    <a href="#3e2222223e3e0808|3e22223e3e2a0808|3e223e3e2a2a0808|be3e3e2a2a2a0808|be223e3e2a2a0808|be22223e3e2a0808|be2222223e3e0808|be22223e3e2a0808|be223e3e2a2a0808|bebe3e2a2a2a0808|bea23e3e2a2a0808|bea2223e3e2a0808|bea222223e3e0808|bea2223e3e2a0808|bea23e3e2a2a0808|bebebe2a2a2a0808|bea2be3e2a2a0808|bea2a23e3e2a0808|bea2a2223e3e0808|bea2a23e3e2a0808|bea2be3e2a2a0808|bebebeaa2a2a0808|bea2bebe2a2a0808|bea2a2be3e2a0808|bea2a2a23e3e0808|bea2a2be3e2a0808|bea2bebe2a2a0808|bebebeaaaa2a0808|bea2bebeaa2a0808|bea2a2bebe2a0808|bea2a2a2be3e0808|bea2a2bebe2a0808|bea2bebeaa2a0808|bebebeaaaaaa0808|bea2bebeaaaa0808|bea2a2bebeaa0808|bea2a2a2bebe0808|bea2a2a2a2be1c08|bea2a2a2a2a21c1c|bea2a2a2a222001c|bea2a2a22222001c|bea2a2222222001c|bea222222222001c|be2222222222001c|3e2222222222001c|3e2222222222001c|3e22222222221c1c|3e222222223e1c08">
+                        Motor-pump
+                    </a>
+                </li>
+            </ul>
 
-<div class="note" style="text-align: left; clear: both; ">
-    Use Drag-and-Drop to reorder images ↓
-    <div style="float: right">&copy 2015 <a href="mailto:xantorohara@gmail.com">Xantorohara</a></div>
+            <h3>Articles</h3>
+            <ul>
+                <li>
+                    <a href="http://xantorohara.blogspot.com/2015/09/arduino-led-matrix-editor.html" target="_blank">
+                        Sample: uint64_t
+                    </a>
+                </li>
+                <li>
+                    <a href="http://xantorohara.blogspot.com/2015/09/arduino-led-matrix-state-as-array-of.html"
+                       target="_blank">
+                        Sample: byte[8]
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-</div>
+        <div class="col-xs-6 col-md-3 col-md-push-6 debug">
+            <div class="checkbox pull-right" style="margin-top: 25px;">
+                <label> <input type="checkbox" id="imagesAsByteArrays"> As byte arrays </label>
+            </div>
 
-<div id="previews" style="clear: both; "></div>
+            <h3>Arduino/C code</h3>
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript"> (function (d, w, c) {
-    (w[c] = w[c] || []).push(function () {
-        try {
-            w.yaCounter25278200 = new Ya.Metrika({
-                id: 25278200,
-                clickmap: true,
-                trackLinks: true,
-                accurateTrackBounce: true
-            });
-        } catch (e) {
+            <textarea id="output" spellcheck="false" style="width: 100%;"></textarea>
+
+        </div>
+
+        <div class="col-xs-12 col-md-6 col-md-pull-3 text-center debug">
+            <table style="display: inline-block">
+                <tr>
+                    <td></td>
+                    <td id="cols"></td>
+                    <td id="indexSelectsWhole" style="cursor: pointer">
+                        <small>
+                            <span class="glyphicon glyphicon-hand-left"></span>
+                            Index selects whole row or column
+                        </small>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="rows"></td>
+                    <td id="leds"></td>
+                    <td style="padding-left: 70px;">
+                        <div style="position: relative; width: 190px; height: 110px;">
+                            <button id="shiftUpButton" style="top:0; left:40px;">
+                                <span class="glyphicon glyphicon-triangle-top"></span>
+                            </button>
+                            <button id="shiftRightButton" style="top:40px; left:80px;">
+                                <span class="glyphicon glyphicon-triangle-right"></span>
+                            </button>
+                            <button id="shiftDownButton" style="top:80px; left:40px;">
+                                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                            </button>
+                            <button id="shiftLeftButton" style="top:40px; left:0;">
+                                <span class="glyphicon glyphicon-triangle-left"></span>
+                            </button>
+                            <button id="invertButton" style="top: 0; left: 120px;">Invert</button>
+                            <button id="clearButton" style="top: 80px; left: 120px;">Clear</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="padding-top: 25px">
+                        <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
+                    </td>
+                    <td style="padding-top: 25px; padding-left: 30px;">
+                        <div style=" position: relative; width: 230px; height: 30px;">
+                            <button id="insertButton" style="top:0; left: 0;">Insert</button>
+                            <button id="updateButton" style="top:0; left: 80px;">Update</button>
+                            <button id="deleteButton" style="top:0; left: 160px;">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="row" style="padding: 5px;">
+        <small>
+            Use Drag-and-Drop to reorder images
+            <span class="glyphicon glyphicon-hand-down"></span>
+        </small>
+    </div>
+
+    <div id="previews" class="row" style="clear: both; "></div>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript"> (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter25278200 = new Ya.Metrika({
+                    id: 25278200,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true
+                });
+            } catch (e) {
+            }
+        });
+        var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+            n.parentNode.insertBefore(s, n);
+        };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
         }
-    });
-    var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
-        n.parentNode.insertBefore(s, n);
-    };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = "https://mc.yandex.ru/metrika/watch.js";
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else {
-        f();
-    }
-})(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript>
-    <div><img src="https://mc.yandex.ru/watch/25278200" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>
-<!-- /Yandex.Metrika counter -->
+    })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/25278200" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
 
 </body>
 </html>
