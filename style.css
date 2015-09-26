@@ -115,7 +115,7 @@ table.rows td:hover {
 #output {
     resize: none;
     padding: 5px;
-    height: 300px;
+    height: 280px;
     overflow-y: scroll;
 }
 
@@ -126,5 +126,5 @@ table.rows td:hover {
 }
 
 .debug {
-    border: dashed #ff0000 1px;
+    /*border: dashed #ff0000 1px;*/
 }

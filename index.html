@@ -35,10 +35,10 @@
         </p>
 
         <p class="navbar-text pull-right">
-            <small>
+            <a class="small navbar-link">
                 <span class="glyphicon glyphicon-hand-up"></span>
                 Use CTRL+D to save as a bookmark
-            </small>
+            </a>
         </p>
     </div>
 </nav>
@@ -118,7 +118,7 @@
                 <tr>
                     <td></td>
                     <td id="cols"></td>
-                    <td id="indexSelectsWhole" style="cursor: pointer">
+                    <td id="indexSelectsWhole" style="cursor: pointer; width: 300px;">
                         <small>
                             <span class="glyphicon glyphicon-hand-left"></span>
                             Index selects whole row or column
@@ -128,8 +128,8 @@
                 <tr>
                     <td id="rows"></td>
                     <td id="leds"></td>
-                    <td style="padding-left: 70px;">
-                        <div style="position: relative; width: 190px; height: 110px;">
+                    <td>
+                        <div style="display:inline-block;position: relative; width: 190px; height: 110px;">
                             <button id="shiftUpButton" style="top:0; left:40px;">
                                 <span class="glyphicon glyphicon-triangle-top"></span>
                             </button>
@@ -149,15 +149,15 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td style="padding-top: 25px">
-                        <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
-                    </td>
-                    <td style="padding-top: 25px; padding-left: 30px;">
-                        <div style=" position: relative; width: 230px; height: 30px;">
+                    <td style="padding-top: 25px;">
+                        <div style="display: inline-block; position: relative; width: 230px; height: 30px;">
                             <button id="insertButton" style="top:0; left: 0;">Insert</button>
                             <button id="updateButton" style="top:0; left: 80px;">Update</button>
                             <button id="deleteButton" style="top:0; left: 160px;">Delete</button>
                         </div>
+                    </td>
+                    <td style="padding-top: 25px">
+                        <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
                     </td>
                 </tr>
             </table>
