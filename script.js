@@ -4,6 +4,7 @@ $(function () {
     var $insertButton = $('#insertButton');
     var $deleteButton = $('#deleteButton');
     var $updateButton = $('#updateButton');
+    var $leds = $('#leds');
 
     var generator = {
         tableCols: function () {
@@ -66,7 +67,7 @@ $(function () {
             }
             out.pop();
             out.push('\n};\n');
-            out.push('const int IMAGES_LEN = sizeof(IMAGES)/sizeof(uint64_t);\n');
+            out.push('const int IMAGES_LEN = sizeof(IMAGES)/8;\n');
 
             return out.join('');
         },
@@ -115,7 +116,7 @@ $(function () {
         for (var i = 1; i < 9; i++) {
             var byte = [];
             for (var j = 1; j < 9; j++) {
-                var active = $('.leds td[data-row=' + i + '][data-col=' + j + '] ').hasClass('active');
+                var active = $leds.find('td[data-row=' + i + '][data-col=' + j + '] ').hasClass('active');
                 byte.push(active ? '1' : '0');
             }
             byte.reverse();
@@ -129,14 +130,13 @@ $(function () {
 
     function hexInputToLeds() {
         var val = getInputHexValue();
-
         for (var i = 1; i < 9; i++) {
             var byte = val.substr(-2 * i, 2);
 
             byte = parseInt(byte, 16);
             for (var j = 1; j < 9; j++) {
                 var active = !!(byte & 1 << (j - 1));
-                $('.leds td[data-row=' + i + '][data-col=' + j + '] ').toggleClass('active', active);
+                $leds.find('td[data-row=' + i + '][data-col=' + j + '] ').toggleClass('active', active);
             }
         }
     }
@@ -212,20 +212,20 @@ $(function () {
 
     $('#cols').append($(generator.tableCols()));
     $('#rows').append($(generator.tableRows()));
-    $('#leds').append($(generator.tableLeds()));
+    $leds.append($(generator.tableLeds()));
 
-    $('table.leds td').mousedown(function () {
+    $leds.find('td').mousedown(function () {
         $(this).toggleClass('active');
         ledsToHex();
     });
 
     $('#invertButton').click(function () {
-        $('table.leds td').toggleClass('active');
+        $leds.find('td').toggleClass('active');
         ledsToHex();
     });
 
     $('#clearButton').click(function () {
-        $('table.leds td').removeClass('active');
+        $leds.find('td').removeClass('active');
         ledsToHex();
     });
 
@@ -277,15 +277,15 @@ $(function () {
 
     $('table.cols td').mousedown(function () {
         var col = $(this).attr('data-col');
-        $('table.leds td[data-col=' + col + ']').toggleClass('active',
-            $('table.leds td[data-col=' + col + '].active').length != 8);
+        $leds.find('td[data-col=' + col + ']').toggleClass('active',
+            $leds.find('td[data-col=' + col + '].active').length != 8);
         ledsToHex();
     });
 
     $('table.rows td[data-row]').mousedown(function () {
         var row = $(this).attr('data-row');
-        $('table.leds td[data-row=' + row + ']').toggleClass('active',
-            $('table.leds td[data-row=' + row + '].active').length != 8);
+        $leds.find('td[data-row=' + row + ']').toggleClass('active',
+            $leds.find('td[data-row=' + row + '].active').length != 8);
         ledsToHex();
     });
 

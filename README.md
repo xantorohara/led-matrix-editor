@@ -17,6 +17,7 @@ It looks very simple, but it has some handy features:
 - Update images as well as insert new or delete existing
 - Save images as a C code for Arduino
 - Choose type of generated code (64-bit integers or arrays of bytes)
+- Font 8x8  
 - Use browsing history and save images as a link or bookmark, so you never lost your creations
 
 I hope you will be fun and happy using it.

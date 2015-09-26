@@ -4,6 +4,8 @@ html, body {
 
 body {
     background: #ccc linear-gradient(#eee, #ccc);
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #input,
