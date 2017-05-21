@@ -82,3 +82,7 @@ Connect components:
 See how it works and enjoy:
 
 [![Video](resources/MAH02147_960x540.jpg)](resources/MAH02147_960x540.mp4)
+
+
+There are a lot LED matrix modules you can buy here:
+[![Module](resources/max7219-module.jpg)](http://s.click.aliexpress.com/e/JUrN7eM)
