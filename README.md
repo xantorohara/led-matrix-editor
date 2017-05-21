@@ -83,6 +83,10 @@ See how it works and enjoy:
 
 [![Video](resources/MAH02147_960x540.jpg)](resources/MAH02147_960x540.mp4)
 
+You may choose how to store images - as long integers or as byte arrays:
+
+![Screenshot](resources/led-matrix-editor-bytes.png)
 
 There are a lot LED matrix modules you can buy here:
+
 [![Module](resources/max7219-module.jpg)](http://s.click.aliexpress.com/e/JUrN7eM)
