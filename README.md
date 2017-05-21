@@ -4,7 +4,7 @@ LED matrix 8x8 online editor
 [LED Matrix Editor](http://xantorohara.github.io/led-matrix-editor) - 
 is online tool for editing and creating animations for LED matrices.
 
-![Screenshot](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/images/led-matrix-editor.png)
+![Screenshot](resources/led-matrix-editor.png)
 
 It looks very simple, but it has some handy features:
 
@@ -76,9 +76,9 @@ void loop() {
 
 Connect components:
 
-![Arduino board and LED matrix](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02145_960x540.jpg)
+![Arduino board and LED matrix](resources/MAH02145_960x540.jpg)
 
 
 See how it works and enjoy:
 
-[![Video](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.jpg)](https://dl.dropboxusercontent.com/u/5036450/arduino-howto/videos/MAH02147_960x540.mp4)
+[![Video](resources/MAH02147_960x540.jpg)](resources/MAH02147_960x540.mp4)
