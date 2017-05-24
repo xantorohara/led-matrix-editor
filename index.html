@@ -8,16 +8,16 @@
     <meta name="description" content="Online editor: create images for LED matrix">
     <meta name="author" content="Xantorohara"/>
 
-    <link rel="stylesheet" type="text/css" href="style.css?20150924">
-    <link rel="icon" type="image/png" href="icon.png "/>
+    <link rel="stylesheet" type="text/css" href="style.css?20170524">
+    <link rel="icon" type="image/png" href="icon.png"/>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- highlight.js -->
     <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">-->
@@ -27,49 +27,21 @@
 </head>
 
 <body>
+
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                LED Matrix Editor 8x8
-            </a>
+            <a class="navbar-brand" href="#">LED Matrix Editor</a>
         </div>
         <ul class="nav navbar-nav">
-            <!--<li class="active"><a href="#">Home</a></li>-->
-            <li class="dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                    Arduino HowTos<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="http://xantorohara.blogspot.com/2015/09/arduino-led-matrix-editor.html"
-                           target="_blank">
-                            Image as 64-bit integer
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://xantorohara.blogspot.com/2015/09/arduino-led-matrix-state-as-array-of.html"
-                           target="_blank">
-                            Image as byte array
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://xantorohara.blogspot.com/2015/09/arduino-store-64-bit-integers-in-progmem.html"
-                           target="_blank">
-                            Store images in PROGMEM
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#samples">Code samples</a></li>
         </ul>
-
-        <p class="navbar-text pull-right">
-            &copy; 2015-2017 <a href="mailto:xantorohara@gmail.com" class="navbar-link">Xantorohara</a>
-        </p>
 
         <p class="navbar-text pull-right">
             <a class="small navbar-link">
                 <span class="glyphicon glyphicon-hand-up"></span>
-                Use CTRL+D to save as a bookmark
+                Use CTRL+D to save current state as a bookmark
             </a>
         </p>
     </div>
@@ -93,7 +65,7 @@
                 </li>
                 <li>
                     <a href="#0000000000000000|0018181818001818|18187e03037e1818|003f67060f26361c|00633e363e630000|0c0c3f0c3f1e3333|0018181800181818|1e331c36361cc67c|0000000000000033|3c4299858599423c|000000007c36363c|0000cc663366cc00|000030303f000000|0000000000000000|3c42a59da59d423c|000000000000007e|000000001c36361c|007e0018187e1818|0000003c0c18301c|0000001c3018301c|0000000000000c18|03063e6666660000|00d8d8d8dedbdbfe|0000001818000000|1e30180000000000|000000001c080c08|000000001c36361c|00003366cc663300|03f3f6ecbd3363c3|f03366cc7b3363c3|80e6acdbb463c403|001e3303060c000c|00637f63361c0007|00637f63361c0070|00637f633e00361c|00637f633e003b6e|0063637f63361c63|00333f331e000c0c|007333337f33367c|1e30181e3303331e|003f061e063f0007|003f061e063f0038|003f061e063f120c|003f061e063f0036|001e0c0c0c1e0007|001e0c0c0c1e0038|001e0c0c1e00120c|001e0c0c0c1e0033|003f66666f6f663f|00333b3f3733003f|00183c663c18000e|00183c663c180070|00183c663c18663c|003e63633e003b6e|00183c66663c18c3|0000361c081c3600|001d366f7b73365c|003c66666666000e|003c666666660070|003c66666600663c|001e333333330033|0018183c66660070|0f063e66663e060f|03031f331f331e00|007e333e301e0007|007e333e301e0038|00fc667c603cc37e|007e333e301e3b6e|007e333e301e0033|007e333e301e0c0c|00fe33fe30fe0000|1c301e03031e0000|001e033f331e0007|001e033f331e0038|003c067e663cc37e|001e033f331e0033|001e0c0c0c0e0007|001e0c0c0c0e001c|003c1818181c633e|001e0c0c0c0e0033|001e333e301b0e1b|003333331f001f00|001e33331e000700|001e33331e003800|001e33331e00331e|001e33331e003b6e|001e33331e003300|001818007e001818|063c6e7e763c6000|007e333333000700|007e333333003800|007e33333300331e|007e333333003300|1f303e3333003800|00063e663e060000|1f303e3333003300">
-                        Font 8x8 (2) +
+                        Font 8x8 (3)
                     </a>
                 </li>
                 <li>
@@ -107,11 +79,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#3e2222223e3e0808|3e22223e3e2a0808|3e223e3e2a2a0808|be3e3e2a2a2a0808|be223e3e2a2a0808|be22223e3e2a0808|be2222223e3e0808|be22223e3e2a0808|be223e3e2a2a0808|bebe3e2a2a2a0808|bea23e3e2a2a0808|bea2223e3e2a0808|bea222223e3e0808|bea2223e3e2a0808|bea23e3e2a2a0808|bebebe2a2a2a0808|bea2be3e2a2a0808|bea2a23e3e2a0808|bea2a2223e3e0808|bea2a23e3e2a0808|bea2be3e2a2a0808|bebebeaa2a2a0808|bea2bebe2a2a0808|bea2a2be3e2a0808|bea2a2a23e3e0808|bea2a2be3e2a0808|bea2bebe2a2a0808|bebebeaaaa2a0808|bea2bebeaa2a0808|bea2a2bebe2a0808|bea2a2a2be3e0808|bea2a2bebe2a0808|bea2bebeaa2a0808|bebebeaaaaaa0808|bea2bebeaaaa0808|bea2a2bebeaa0808|bea2a2a2bebe0808|bea2a2a2a2be1c08|bea2a2a2a2a21c1c|bea2a2a2a222001c|bea2a2a22222001c|bea2a2222222001c|bea222222222001c|be2222222222001c|3e2222222222001c|3e2222222222001c|3e22222222221c1c|3e222222223e1c08">
-                        Motor-pump
+                    <a href="#3e2222223e3e0808">
+                        Code sample
                     </a>
                 </li>
-
             </ul>
 
             <small>
@@ -200,7 +171,7 @@
 </div>
 
 <div class="container">
-    <h2>Overview</h2>
+    <h2 id="overview">Overview</h2>
     <p>
         LED Matrix Editor - is online tool for editing and creating animations for 8x8 LED matrices.
         It is free and easy to use.
@@ -221,7 +192,7 @@
         <li>Use predefined sets of fonts and icons</li>
     </ul>
 
-    <h2>Code samples</h2>
+    <h2 id="samples">Code samples</h2>
 
     <h3>Matrix as a 64-bit long integer</h3>
     <p>
@@ -419,10 +390,12 @@ void loop() {
     <h3>Animation data in PROGMEM</h3>
     <p>
         Arduino has limited amount of RAM. For example my UNO based on ATmega328P has only 2KB of RAM. Not very much.
-        <br/>
+
         But it has 32KB of Flash memory. Why not to use it for storing animations? No problem.
-        <br/>
-        Just push this data into the PROGMEM and then read them. Like here:
+
+        Just push this data into the PROGMEM and then read them.
+
+        For example this program use just 99 bytes (4%) of dynamic memory:
     </p>
 <pre><code class="lang-cpp">#include &lt;LedControl.h&gt;
 
@@ -594,14 +567,17 @@ void loop() {
   delay(1000);
 }
 </code></pre>
-    <p class="text-center">&copy; 2015-2017 Xantorohara</p>
+
+    <p class="text-center">
+        &copy; 2015-2017 <a href="mailto:xantorohara@gmail.com" class="navbar-link">Xantorohara</a>
+    </p>
 
 </div>
 
 </body>
 
 <!-- Yandex.Metrika counter -->
-<!--script type="text/javascript">
+<script type="text/javascript">
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function() {
             try {
