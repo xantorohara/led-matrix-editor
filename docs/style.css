@@ -56,7 +56,11 @@ table.leds td,
 table.cols td,
 table.rows td {
     width: 25px;
+    min-width: 25px;
+    max-width: 25px;
     height: 25px;
+    min-height: 25px;
+    max-height: 25px;
     cursor: pointer;
     font-size: 17px;
 }
