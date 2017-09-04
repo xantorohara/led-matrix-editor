@@ -10,42 +10,58 @@
 
     <meta name="google-site-verification" content="jiVeWC16vJvb-WaFNr5oYUCvsWpiUpa21_r-zB-tH3E"/>
 
-    <link rel="stylesheet" type="text/css" href="style.css?20170524">
     <link rel="icon" type="image/png" href="icon.png"/>
+    <style>
+        @media only screen and (min-height: 900px) {
+            #frames {
+                height: 400px;
+            }
+        }
+    </style>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="lib/highlight/styles/androidstudio.css">
 
-    <!-- highlight.js -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
 
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/highlight/highlight.pack.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
     <script src="script.js?20150918"></script>
+
 </head>
 
-<body>
+<body class="red-theme">
 
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">LED Matrix Editor</a>
         </div>
+
         <ul class="nav navbar-nav">
             <li><a href="#overview">Overview</a></li>
-            <li><a href="#hardware">Hardware</a></li>
             <li><a href="#samples">Code samples</a></li>
         </ul>
 
-        <p class="navbar-text pull-right">
-            <a class="small navbar-link">
-                <span class="glyphicon glyphicon-hand-up"></span>
-                Use CTRL+D to save current state as a bookmark
-            </a>
+        <p class="navbar-text pull-right small">
+            <span class="glyphicon glyphicon-hand-up"></span>
+            Use CTRL+D to save current state as a bookmark
+        </p>
+
+        <div class="navbar-text pull-right" style="margin-top: 10px; margin-bottom: 5px;">
+            <div id="red-theme-case" class="theme-case" data-theme="red-theme"></div>
+            <div id="yellow-theme-case" class="theme-case" data-theme="yellow-theme"></div>
+            <div id="green-theme-case" class="theme-case" data-theme="green-theme"></div>
+            <div id="blue-theme-case" class="theme-case" data-theme="blue-theme"></div>
+            <div id="white-theme-case" class="theme-case" data-theme="white-theme"></div>
+        </div>
+        <p class="navbar-text pull-right small">
+            Select LEDs color <span class="glyphicon glyphicon-hand-right"></span>
         </p>
     </div>
 </nav>
@@ -92,20 +108,20 @@
                 </li>
             </ul>
             <div>
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- led-matrix-editor-small -->
+                <!--script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
                 <ins class="adsbygoogle"
                      style="display:inline-block;width:300px;height:250px"
                      data-ad-client="ca-pub-6112298272240282"
                      data-ad-slot="1166275080"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                </script-->
             </div>
         </div>
         <div class="col-xs-6 col-md-3 col-md-push-6 debug">
             <div class="checkbox pull-right" style="margin-top: 25px;">
-                <label> <input type="checkbox" id="imagesAsByteArrays"> As byte arrays </label>
+                <label> <input type="checkbox" id="images-as-byte-arrays"> As byte arrays </label>
             </div>
 
             <h3>Arduino/C code</h3>
@@ -114,58 +130,64 @@
 
         </div>
 
-        <div class="col-xs-12 col-md-6 col-md-pull-3 text-center debug">
-            <table style="display: inline-block" class="debug">
+        <div id="plate" class="col-xs-12 col-md-6 col-md-pull-3 text-center debug">
+            <table style="display: inline-block;">
                 <tr>
-                    <td></td>
-                    <td id="cols"></td>
-                    <td id="indexSelectsWhole" style="cursor: pointer; width: 300px;">
-                        <small>
-                            <span class="glyphicon glyphicon-hand-left"></span>
-                            Click to select whole row or column
-                        </small>
+                    <td id="matrix-toggle" title="Select/Clear all elements">
+                        <span class="glyphicon glyphicon-th-large"></span>
                     </td>
-                </tr>
-                <tr>
-                    <td id="rows"></td>
-                    <td id="leds"></td>
-                    <td class="debug">
-                        <div style="display:inline-block;position: relative; width: 190px; height: 110px;">
-                            <button id="shiftUpButton" style="top:0; left:40px;">
-                                <span class="glyphicon glyphicon-triangle-top"></span>
-                            </button>
-                            <button id="shiftRightButton" style="top:40px; left:80px;">
-                                <span class="glyphicon glyphicon-triangle-right"></span>
-                            </button>
-                            <button id="shiftDownButton" style="top:80px; left:40px;">
-                                <span class="glyphicon glyphicon-triangle-bottom"></span>
-                            </button>
-                            <button id="shiftLeftButton" style="top:40px; left:0;">
-                                <span class="glyphicon glyphicon-triangle-left"></span>
-                            </button>
-                            <button id="invertButton" style="top: 0; left: 120px;">Invert</button>
-                            <button id="clearButton" style="top: 80px; left: 120px;">Clear</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style="padding-top: 25px;">
-                        <div style="display: inline-block; position: relative; width: 230px; height: 30px;">
-                            <button id="insertButton" style="top:0; left: 0;">Insert</button>
-                            <button id="updateButton" style="top:0; left: 80px;">Update</button>
-                            <button id="deleteButton" style="top:0; left: 160px;">Delete</button>
-                        </div>
-                    </td>
-                    <td style="padding-top: 25px;position: relative">
-                        <div style="position: absolute; top: 0; left: 50px;">
-                            <small>
-                                <span class="glyphicon glyphicon-hand-down"></span>
-                                You can input value for matrix
-                            </small>
-                        </div>
 
-                        <input id="input" type="text" maxlength="16" placeholder="UINT64 HEX">
+                    <td>
+                        <div id="cols-container"></div>
+                    </td>
+
+                    <td id="player-container">
+                        <label for="play-delay-input">Play </label>
+                        <input id="play-delay-input" type="number" min="100" value="500">
+                        <small> ms.</small>
+                        <button id="play-button">
+                            <span id="play-button-play" class="glyphicon glyphicon-play"></span>
+                            <span id="play-button-stop" style="display: none" class="glyphicon glyphicon-stop"></span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td id="rows-container"></td>
+
+                    <td id="leds-container"></td>
+
+                    <td>
+                        <div id="shift-buttons-container">
+                            <button id="shift-up-button" style="top:10px; left:50px;" title="Shift matrix up">
+                                <span class="glyphicon glyphicon-chevron-up"></span>
+                            </button>
+                            <button id="shift-right-button" style="top:50px; left:90px;" title="Shift matrix right">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </button>
+                            <button id="shift-down-button" style="top:90px; left:50px;" title="Shift matrix down">
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </button>
+                            <button id="shift-left-button" style="top:50px; left:10px;" title="Shift matrix left">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </button>
+                            <button id="invert-button" style="top: 50px; left: 50px;" title="Invert matrix">
+                                <span class="glyphicon glyphicon-adjust"></span>
+                            </button>
+                        </div>
+                        <br/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td id="edit-buttons-container">
+                        <button id="insert-button" title="Insert matrix into the animation">Insert</button>
+                        <button id="update-button" title="Update matrix in the animation">Update</button>
+                        <button id="delete-button" title="Delete matrix from the animation">Delete</button>
+                    </td>
+                    <td id="hex-input-container">
+                        <input id="hex-input" maxlength="16" placeholder="UINT64 HEX" title="Input matrix as a 64-bit number in HEX format">
                     </td>
                 </tr>
             </table>
@@ -174,6 +196,7 @@
 
     </div>
 
+
     <div class="row" style="padding: 5px;">
         <small>
             Use Drag-and-Drop to reorder images
@@ -181,13 +204,13 @@
         </small>
     </div>
 
-    <div id="previews" class="row" style="clear: both; "></div>
+    <div id="frames" class="row" style="clear: both; "></div>
 </div>
 
 <div class="container">
     <br/>
     <p class="text-center">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!--script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-6112298272240282"
@@ -195,7 +218,7 @@
              data-ad-format="auto"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        </script-->
     </p>
 
     <h2 id="overview">Overview</h2>
@@ -293,7 +316,7 @@ void loop() {
         This case is also supported. Here is example of using an array of bytes in binary format:
     </p>
 
-<pre><code class="lang-cpp">#include &lt;LedControl.h&gt;
+    <pre><code class="lang-cpp">#include &lt;LedControl.h&gt;
 
 const int DIN_PIN = 7;
 const int CS_PIN = 6;
@@ -484,7 +507,7 @@ void loop() {
 
         <!--For example this program use just 99 bytes (4%) of dynamic memory:-->
     </p>
-<pre><code class="lang-cpp">#include &lt;LedControl.h&gt;
+    <pre><code class="lang-cpp">#include &lt;LedControl.h&gt;
 
 const int DIN_PIN = 7;
 const int CS_PIN = 6;
@@ -546,7 +569,7 @@ void loop() {
 </script>
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
+<!--script type="text/javascript">
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function () {
             try {
@@ -578,7 +601,7 @@ void loop() {
 </script>
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/44760415" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>
+</noscript-->
 <!-- /Yandex.Metrika counter -->
 
 </html>
