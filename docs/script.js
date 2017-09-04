@@ -1,34 +1,35 @@
 $(function () {
-    var $previews = $('#previews');
-    var $hexInput = $('#input');
-    var $insertButton = $('#insertButton');
-    var $deleteButton = $('#deleteButton');
-    var $updateButton = $('#updateButton');
-    var $leds = $('#leds');
+    var $frames = $('#frames');
+    var $hexInput = $('#hex-input');
+    var $insertButton = $('#insert-button');
+    var $deleteButton = $('#delete-button');
+    var $updateButton = $('#update-button');
+
+    var $leds, $cols, $rows;
 
     var generator = {
         tableCols: function () {
-            var out = ['<table class="cols"><tr>'];
+            var out = ['<table id="cols-list"><tr>'];
             for (var i = 1; i < 9; i++) {
-                out.push('<td data-col="' + i + '">' + i + '</td>');
+                out.push('<td class="item" data-col="' + i + '">' + i + '</td>');
             }
             out.push('</tr></table>');
             return out.join('');
         },
         tableRows: function () {
-            var out = ['<table class="rows">'];
+            var out = ['<table id="rows-list">'];
             for (var i = 1; i < 9; i++) {
-                out.push('<tr><td data-row="' + i + '">' + i + '</td></tr>');
+                out.push('<tr><td class="item" data-row="' + i + '">' + i + '</td></tr>');
             }
             out.push('</table>');
             return out.join('');
         },
         tableLeds: function () {
-            var out = ['<table class="leds">'];
+            var out = ['<table id="leds-matrix">'];
             for (var i = 1; i < 9; i++) {
                 out.push('<tr>');
                 for (var j = 1; j < 9; j++) {
-                    out.push('<td data-row="' + i + '" data-col="' + j + '"></td>');
+                    out.push('<td class="item" data-row="' + i + '" data-col="' + j + '"></td>');
                 }
                 out.push('</tr>');
             }
@@ -38,8 +39,8 @@ $(function () {
     };
 
     var converter = {
-        patternToPreview: function (pattern) {
-            var out = ['<table class="preview" data-hex="' + pattern + '">'];
+        patternToFrame: function (pattern) {
+            var out = ['<table class="frame" data-hex="' + pattern + '">'];
             for (var i = 1; i < 9; i++) {
                 var byte = pattern.substr(-2 * i, 2);
                 byte = parseInt(byte, 16);
@@ -47,9 +48,9 @@ $(function () {
                 out.push('<tr>');
                 for (var j = 0; j < 8; j++) {
                     if ((byte & 1 << j)) {
-                        out.push('<td class="active"></td>');
+                        out.push('<td class="item active"></td>');
                     } else {
-                        out.push('<td></td>');
+                        out.push('<td class="item"></td>');
                     }
                 }
                 out.push('</tr>');
@@ -106,9 +107,9 @@ $(function () {
         }
     };
 
-    function makePreviewElement(pattern) {
+    function makeFrameElement(pattern) {
         pattern = converter.fixPattern(pattern);
-        return $(converter.patternToPreview(pattern)).click(onPreviewClick);
+        return $(converter.patternToFrame(pattern)).click(onFrameClick);
     }
 
     function ledsToHex() {
@@ -116,7 +117,7 @@ $(function () {
         for (var i = 1; i < 9; i++) {
             var byte = [];
             for (var j = 1; j < 9; j++) {
-                var active = $leds.find('td[data-row=' + i + '][data-col=' + j + '] ').hasClass('active');
+                var active = $leds.find('.item[data-row=' + i + '][data-col=' + j + '] ').hasClass('active');
                 byte.push(active ? '1' : '0');
             }
             byte.reverse();
@@ -136,7 +137,7 @@ $(function () {
             byte = parseInt(byte, 16);
             for (var j = 1; j < 9; j++) {
                 var active = !!(byte & 1 << (j - 1));
-                $leds.find('td[data-row=' + i + '][data-col=' + j + '] ').toggleClass('active', active);
+                $leds.find('.item[data-row=' + i + '][data-col=' + j + '] ').toggleClass('active', active);
             }
         }
     }
@@ -146,7 +147,7 @@ $(function () {
     function printArduinoCode(patterns) {
         if (patterns.length) {
             var code;
-            if ($('#imagesAsByteArrays').prop("checked")) {
+            if ($('#images-as-byte-arrays').prop("checked")) {
                 code = converter.patternsToCodeBytesArray(patterns);
             } else {
                 code = converter.patternsToCodeUint64Array(patterns);
@@ -155,33 +156,33 @@ $(function () {
         }
     }
 
-    function previewsToPatterns() {
+    function framesToPatterns() {
         var out = [];
-        $previews.find('.preview').each(function () {
+        $frames.find('.frame').each(function () {
             out.push($(this).attr('data-hex'));
         });
         return out;
     }
 
     function saveState() {
-        var patterns = previewsToPatterns();
+        var patterns = framesToPatterns();
         printArduinoCode(patterns);
         window.location.hash = savedHashState = patterns.join('|');
     }
 
     function loadState() {
         savedHashState = window.location.hash.slice(1);
-        $previews.empty();
-        var preview;
+        $frames.empty();
+        var frame;
         var patterns = savedHashState.split('|');
         patterns = converter.fixPatterns(patterns);
 
         for (var i = 0; i < patterns.length; i++) {
-            preview = makePreviewElement(patterns[i]);
-            $previews.append(preview);
+            frame = makeFrameElement(patterns[i]);
+            $frames.append(frame);
         }
-        preview.addClass('selected');
-        $hexInput.val(preview.attr('data-hex'));
+        frame.addClass('selected');
+        $hexInput.val(frame.attr('data-hex'));
         printArduinoCode(patterns);
         hexInputToLeds();
     }
@@ -190,17 +191,17 @@ $(function () {
         return converter.fixPattern($hexInput.val());
     }
 
-    function onPreviewClick() {
+    function onFrameClick() {
         $hexInput.val($(this).attr('data-hex'));
         processToSave($(this));
         hexInputToLeds();
     }
 
-    function processToSave($focusToPreview) {
-        $previews.find('.preview.selected').removeClass('selected');
+    function processToSave($focusToFrame) {
+        $frames.find('.frame.selected').removeClass('selected');
 
-        if ($focusToPreview.length) {
-            $focusToPreview.addClass('selected');
+        if ($focusToFrame.length) {
+            $focusToFrame.addClass('selected');
             $deleteButton.removeAttr('disabled');
             $updateButton.removeAttr('disabled');
         } else {
@@ -210,38 +211,37 @@ $(function () {
         saveState();
     }
 
-    $('#cols').append($(generator.tableCols()));
-    $('#rows').append($(generator.tableRows()));
-    $leds.append($(generator.tableLeds()));
+    $('#cols-container').append($(generator.tableCols()));
+    $('#rows-container').append($(generator.tableRows()));
+    $('#leds-container').append($(generator.tableLeds()));
 
-    $leds.find('td').mousedown(function () {
+    $cols = $('#cols-list');
+    $rows = $('#rows-list');
+    $leds = $('#leds-matrix');
+
+    $leds.find('.item').mousedown(function () {
         $(this).toggleClass('active');
         ledsToHex();
     });
 
-    $('#invertButton').click(function () {
-        $leds.find('td').toggleClass('active');
+    $('#invert-button').click(function () {
+        $leds.find('.item').toggleClass('active');
         ledsToHex();
     });
 
-    $('#clearButton').click(function () {
-        $leds.find('td').removeClass('active');
-        ledsToHex();
-    });
-
-    $('#shiftUpButton').click(function () {
+    $('#shift-up-button').click(function () {
         var val = '00' + getInputHexValue().substr(0, 14);
         $hexInput.val(val);
         hexInputToLeds();
     });
 
-    $('#shiftDownButton').click(function () {
+    $('#shift-down-button').click(function () {
         var val = getInputHexValue().substr(2, 14) + '00';
         $hexInput.val(val);
         hexInputToLeds();
     });
 
-    $('#shiftRightButton').click(function () {
+    $('#shift-right-button').click(function () {
         var val = getInputHexValue();
 
         var out = [];
@@ -258,7 +258,7 @@ $(function () {
         hexInputToLeds();
     });
 
-    $('#shiftLeftButton').click(function () {
+    $('#shift-left-button').click(function () {
         var val = getInputHexValue();
 
         var out = [];
@@ -275,17 +275,17 @@ $(function () {
         hexInputToLeds();
     });
 
-    $('table.cols td').mousedown(function () {
+    $cols.find('.item').mousedown(function () {
         var col = $(this).attr('data-col');
-        $leds.find('td[data-col=' + col + ']').toggleClass('active',
-            $leds.find('td[data-col=' + col + '].active').length != 8);
+        $leds.find('.item[data-col=' + col + ']').toggleClass('active',
+            $leds.find('.item[data-col=' + col + '].active').length != 8);
         ledsToHex();
     });
 
-    $('table.rows td[data-row]').mousedown(function () {
+    $rows.find('.item').mousedown(function () {
         var row = $(this).attr('data-row');
-        $leds.find('td[data-row=' + row + ']').toggleClass('active',
-            $leds.find('td[data-row=' + row + '].active').length != 8);
+        $leds.find('.item[data-row=' + row + ']').toggleClass('active',
+            $leds.find('.item[data-row=' + row + '].active').length != 8);
         ledsToHex();
     });
 
@@ -294,62 +294,105 @@ $(function () {
     });
 
     $deleteButton.click(function () {
-        var $selectedPreview = $previews.find('.preview.selected').first();
-        var $nextPreview = $selectedPreview.next('.preview').first();
+        var $selectedFrame = $frames.find('.frame.selected').first();
+        var $nextFrame = $selectedFrame.next('.frame').first();
 
-        if (!$nextPreview.length) {
-            $nextPreview = $selectedPreview.prev('.preview').first();
+        if (!$nextFrame.length) {
+            $nextFrame = $selectedFrame.prev('.frame').first();
         }
 
-        $selectedPreview.remove();
+        $selectedFrame.remove();
 
-        if ($nextPreview.length) {
-            $hexInput.val($nextPreview.attr('data-hex'));
+        if ($nextFrame.length) {
+            $hexInput.val($nextFrame.attr('data-hex'));
         }
 
-        processToSave($nextPreview);
+        processToSave($nextFrame);
 
         hexInputToLeds();
     });
 
     $insertButton.click(function () {
-        var $newPreview = makePreviewElement(getInputHexValue());
-        var $selectedPreview = $previews.find('.preview.selected').first();
+        var $newFrame = makeFrameElement(getInputHexValue());
+        var $selectedFrame = $frames.find('.frame.selected').first();
 
-        if ($selectedPreview.length) {
-            $selectedPreview.after($newPreview);
+        if ($selectedFrame.length) {
+            $selectedFrame.after($newFrame);
         } else {
-            $previews.append($newPreview);
+            $frames.append($newFrame);
         }
 
-        processToSave($newPreview);
+        processToSave($newFrame);
     });
 
     $updateButton.click(function () {
-        var $newPreview = makePreviewElement(getInputHexValue());
-        var $selectedPreview = $previews.find('.preview.selected').first();
+        var $newFrame = makeFrameElement(getInputHexValue());
+        var $selectedFrame = $frames.find('.frame.selected').first();
 
-        if ($selectedPreview.length) {
-            $selectedPreview.replaceWith($newPreview);
+        if ($selectedFrame.length) {
+            $selectedFrame.replaceWith($newFrame);
         } else {
-            $previews.append($newPreview);
+            $frames.append($newFrame);
         }
 
-        processToSave($newPreview);
+        processToSave($newFrame);
     });
 
-    $('#imagesAsByteArrays').change(function () {
-        var patterns = previewsToPatterns();
+    $('#images-as-byte-arrays').change(function () {
+        var patterns = framesToPatterns();
         printArduinoCode(patterns);
     });
 
-    $('#indexSelectsWhole').hover(function () {
-        $('table.cols td').addClass('hover');
-        $('table.rows td').addClass('hover');
+
+    $('#matrix-toggle').hover(function () {
+        $cols.find('.item').addClass('hover');
+        $rows.find('.item').addClass('hover');
     }, function () {
-        $('table.cols td').removeClass('hover');
-        $('table.rows td').removeClass('hover');
+        $cols.find('.item').removeClass('hover');
+        $rows.find('.item').removeClass('hover');
     });
+
+    $('#matrix-toggle').mousedown(function () {
+        var col = $(this).attr('data-col');
+        $leds.find('.item').toggleClass('active', $leds.find('.item.active').length != 64);
+        ledsToHex();
+    });
+
+    $('.theme-case').click(function () {
+        $('body').removeClass('red-theme yellow-theme green-theme blue-theme white-theme').addClass($(this).attr('data-theme'));
+    });
+
+    var playInterval;
+
+    $('#play-button').click(function () {
+        if (playInterval) {
+            $('#play-button-stop').hide();
+            $('#play-button-play').show();
+            clearInterval(playInterval);
+            playInterval = null;
+        } else {
+            $('#play-button-stop').show();
+            $('#play-button-play').hide();
+
+            playInterval = setInterval(function () {
+                var $selectedFrame = $frames.find('.frame.selected').first();
+                var $nextFrame = $selectedFrame.next('.frame').first();
+
+                if (!$nextFrame.length) {
+                    $nextFrame = $frames.find('.frame').first();
+                }
+
+                if ($nextFrame.length) {
+                    $hexInput.val($nextFrame.attr('data-hex'));
+                }
+
+                processToSave($nextFrame);
+
+                hexInputToLeds();
+            }, $('#play-delay-input').val());
+        }
+    });
+
 
     $(window).on('hashchange', function () {
         if (window.location.hash.slice(1) != savedHashState) {
@@ -357,7 +400,7 @@ $(function () {
         }
     });
 
-    $previews.sortable({
+    $frames.sortable({
         stop: function (event, ui) {
             saveState();
         }
