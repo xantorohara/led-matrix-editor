@@ -199,7 +199,7 @@
 
     <div class="row" style="padding: 5px;">
         <small>
-            Use Drag-and-Drop to reorder images
+            Use Drag-and-Drop to reorder matrices
             <span class="glyphicon glyphicon-hand-down"></span>
         </small>
     </div>
@@ -231,8 +231,9 @@
     <ul>
         <li>Click on LED to toggle single item</li>
         <li>Click on row or column numbers to toggle whole row or column</li>
+        <li>Click on <span class="glyphicon glyphicon-th-large"></span> icon to clear/fill whole matrix</li>
         <li>Shift the matrix Up, Down, Left or Right using arrow buttons</li>
-        <li>Invert or Clear matrix using buttons</li>
+        <li>Invert matrix via <span class="glyphicon glyphicon-adjust"></span> button</li>
         <li>Insert, Update or Delete images</li>
         <li>Reorder images using Drag-and-Drop in the bottom pane</li>
         <li>Use browser bookmarks to save images</li>
@@ -240,23 +241,23 @@
         <li>Choose type of generated code (64-bit integers or arrays of bytes)</li>
         <li>Copy generated C code into your project</li>
         <li>Use predefined sets of fonts and icons</li>
+        <li>Play animation with configurable inter-frame delay (in milliseconds)</li>
+        <li>Choose matrix color</li>
     </ul>
 
     <h2 id="hardware">Hardware</h2>
+    <p> LED Dot matrix driven by MAX7219 works perfect with Arduino</p>
     <p>
-        <a href="http://s.click.aliexpress.com/e/JUrN7eM" target="_blank" title="LED dot matrix MAX7219">
-            LED Dot matrix driven by MAX7219
-        </a> works perfect with Arduino:
-        <br/>
-        <a href="http://s.click.aliexpress.com/e/JUrN7eM" target="_blank" title="LED dot matrix MAX7219">
-            <img src="max7219-module.jpg" alt="LED dot matrix MAX7219">
-        </a>
+        <img src="max7219-module.jpg" alt="LED dot matrix MAX7219">
     </p>
 
     <h2 id="samples">Code samples</h2>
-    Samples below implement this animation:
-    <br/>
-    <img src="animation.gif">
+    <p>
+        Samples below implement this animation:
+    </p>
+    <p>
+        <img src="animation.gif">
+    </p>
     <h3>Matrix as a 64-bit long integer</h3>
     <p>
         State of the 8x8 matrix can be presented as an unsigned long integer (uint64_t).
