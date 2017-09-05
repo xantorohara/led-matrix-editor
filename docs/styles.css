@@ -36,7 +36,13 @@ body {
 #cols-list .item,
 #rows-list .item {
     width: 25px;
+    min-width: 25px;
+    max-width: 25px;
+
     height: 25px;
+    min-height: 25px;
+    max-height: 25px;
+
     cursor: pointer;
     font-size: 15px;
 }
@@ -44,7 +50,7 @@ body {
 #leds-matrix .item {
     border-radius: 50%;
     box-shadow: inset 0 0 1px #666666;
-    background: #808080 radial-gradient(ellipse at 42% 42%, #808080 0%, #606060 25%, #707070 50%);
+    background: #cccccc radial-gradient(ellipse at 42% 42%, #cccccc 0%, #999999 50%);
 }
 
 #leds-matrix {
@@ -122,6 +128,11 @@ body.white-theme #leds-matrix .item.active {
     background: #cccccc radial-gradient(ellipse at 42% 42%, #cccccc 0%, #ffffff 25%, #f0f0f0 50%);
 }
 
+#player {
+    display: inline-block;
+    padding: 10px;
+}
+
 #play-delay-input {
     height: 25px;
     width: 60px;
@@ -130,13 +141,13 @@ body.white-theme #leds-matrix .item.active {
 
 #hex-input {
     text-align: center;
-    width: 200px;
+    width: 150px;
     height: 30px;
     padding: 5px;
 }
 
 #edit-buttons-container {
-    padding: 25px 10px 5px 10px;
+    padding: 10px;
 }
 
 #shift-buttons-container {
@@ -147,16 +158,12 @@ body.white-theme #leds-matrix .item.active {
     height: 130px;
 }
 
-#hex-input-container {
-    padding: 25px 10px 5px 10px;
-}
-
 #insert-button,
 #update-button,
 #delete-button {
-    width: 65px;
+    width: 75px;
     height: 30px;
-    margin: 5px;
+    margin: 0 10px;
 }
 
 #invert-button,
@@ -167,6 +174,7 @@ body.white-theme #leds-matrix .item.active {
     position: absolute;
     height: 30px;
     width: 30px;
+    font-size: 15px;
     box-sizing: border-box;
 }
 
@@ -186,7 +194,7 @@ body.white-theme #leds-matrix .item.active {
     overflow-y: scroll;
     text-align: left;
     border: solid #666666 1px;
-    background: #999999;
+    background: #ccc linear-gradient(#ccc, #aaa)
 }
 
 #frames .frame {
@@ -195,7 +203,7 @@ body.white-theme #leds-matrix .item.active {
     background-color: #333;
     border-spacing: 2px;
     border-collapse: separate;
-    border: solid #666666 2px;
+    border: solid #ccc 2px;
 }
 
 #frames .frame .item {
@@ -203,7 +211,7 @@ body.white-theme #leds-matrix .item.active {
     height: 7px;
     border-radius: 50%;
     box-shadow: inset 0 0 1px lightslategray;
-    background: #808080;
+    background: lightgrey;
 }
 
 #frames .frame.selected {
@@ -218,77 +226,29 @@ body.white-theme #leds-matrix .item.active {
     overflow-y: scroll;
 }
 
+/*Design*/
+/*
 #plate {
-    background-image: url('plate.jpg');
+    background-image: url('img/plate.jpg');
     padding: 5px;
 }
 
-#matrix-toggle,
-#cols-container,
-#rows-container,
-#leds-container,
-#player-container,
-#hex-input-container,
-#edit-buttons-container,
-#shift-buttons-container {
+#matrix {
     color: white;
+    border: solid 1px #547eae;
     background-color: #26477a;
     box-shadow: 10px 10px 10px #333;
-}
-
-#shift-buttons-container button,
-#hex-input-container button,
-#player-container button,
-#edit-buttons-container button {
-    color: black;
-}
-
-#shift-buttons-container input,
-#hex-input-container input,
-#player-container input,
-#edit-buttons-container input {
-    color: black;
-}
-
-#matrix-toggle {
-    border-top: solid 1px #547eae;
-    border-left: solid 1px #547eae;
-}
-
-#cols-container {
-    border-top: solid 1px #547eae;
+    margin: 10px;
 }
 
 #leds-container {
-    border-right: solid 1px #547eae;
-}
-
-#player-container {
-    border-top: solid 1px #547eae;
-    border-right: solid 1px #547eae;
-    border-bottom: solid 1px #547eae;
-}
-
-#rows-container {
-    border-left: solid 1px #547eae;
-    border-bottom: solid 1px #547eae;
-}
-
-#hex-input-container {
-    border-top: solid 1px #547eae;
-    border-right: solid 1px #547eae;
-    border-bottom: solid 1px #547eae;
-}
-
-#shift-buttons-container {
     border: solid 1px #547eae;
 }
 
+#player,
+#shift-buttons-container,
 #edit-buttons-container {
-    border-bottom: solid 1px #547eae;
-    border-left: solid 1px #547eae;
+    background: #eee;
+    box-shadow: 10px 10px 10px #333;
 }
-
-#leds-matrix {
-    box-shadow: 0 0 5px #547eae;
-}
+*/

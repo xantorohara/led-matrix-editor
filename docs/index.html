@@ -4,13 +4,13 @@
     <title>LED Matrix Editor</title>
 
     <meta charset="UTF-8">
-    <meta name="keywords" content="LED matrix, 8x8, online editor, Arduino module">
-    <meta name="description" content="Online editor: create images for LED matrix">
+    <meta name="keywords" content="LED matrix, 8x8, matrix editor, matrix animation">
+    <meta name="description" content="Online matrix editor: create images for LED matrix">
     <meta name="author" content="Xantorohara"/>
 
     <meta name="google-site-verification" content="jiVeWC16vJvb-WaFNr5oYUCvsWpiUpa21_r-zB-tH3E"/>
 
-    <link rel="icon" type="image/png" href="icon.png"/>
+    <link rel="icon" type="image/png" href="img/icon.png"/>
     <style>
         @media only screen and (min-height: 900px) {
             #frames {
@@ -30,8 +30,8 @@
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/highlight/highlight.pack.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
-    <script src="script.js?20150918"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css?20170904"/>
+    <script src="scripts.js?20170904"></script>
 
 </head>
 
@@ -133,31 +133,40 @@
         <div id="plate" class="col-xs-12 col-md-6 col-md-pull-3 text-center debug">
             <table style="display: inline-block;">
                 <tr>
-                    <td id="matrix-toggle" title="Select/Clear all elements">
-                        <span class="glyphicon glyphicon-th-large"></span>
-                    </td>
-
                     <td>
-                        <div id="cols-container"></div>
+                        <table id="matrix">
+                            <tr>
+                                <td id="matrix-toggle" title="Select/Clear all elements">
+                                    <span class="glyphicon glyphicon-th-large"></span>
+                                </td>
+                                <td>
+                                    <div id="cols-container"></div>
+                                </td>
+                                <td style="width: 15px;"></td>
+                            </tr>
+                            <tr>
+                                <td id="rows-container"></td>
+                                <td id="leds-container"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="height: 15px;"></td>
+                            </tr>
+                        </table>
                     </td>
-
-                    <td id="player-container">
-                        <label for="play-delay-input">Play </label>
-                        <input id="play-delay-input" type="number" min="100" value="500">
-                        <small> ms.</small>
-                        <button id="play-button">
-                            <span id="play-button-play" class="glyphicon glyphicon-play"></span>
-                            <span id="play-button-stop" style="display: none" class="glyphicon glyphicon-stop"></span>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td id="rows-container"></td>
-
-                    <td id="leds-container"></td>
-
                     <td>
+                        <div id="player">
+                            <label for="play-delay-input" style="padding-right: 10px;">Play </label>
+                            <input id="play-delay-input" type="number" min="100" value="500">
+                            <small> ms.</small>
+                            <button id="play-button">
+                                <span id="play-button-play" class="glyphicon glyphicon-play"></span>
+                                <span id="play-button-stop" style="display: none" class="glyphicon glyphicon-stop"></span>
+                            </button>
+                        </div>
+                        <div style="height: 50px;"></div>
                         <div id="shift-buttons-container">
                             <button id="shift-up-button" style="top:10px; left:50px;" title="Shift matrix up">
                                 <span class="glyphicon glyphicon-chevron-up"></span>
@@ -172,26 +181,25 @@
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                             </button>
                             <button id="invert-button" style="top: 50px; left: 50px;" title="Invert matrix">
-                                <span class="glyphicon glyphicon-adjust"></span>
+                                <span class="glyphicon glyphicon-lamp"></span>
                             </button>
                         </div>
-                        <br/>
                     </td>
                 </tr>
 
                 <tr>
-                    <td></td>
-                    <td id="edit-buttons-container">
-                        <button id="insert-button" title="Insert matrix into the animation">Insert</button>
-                        <button id="update-button" title="Update matrix in the animation">Update</button>
-                        <button id="delete-button" title="Delete matrix from the animation">Delete</button>
-                    </td>
-                    <td id="hex-input-container">
-                        <input id="hex-input" maxlength="16" placeholder="UINT64 HEX" title="Input matrix as a 64-bit number in HEX format">
+                    <td colspan="2">
+                        <div id="edit-buttons-container">
+                            <button id="insert-button" title="Insert matrix into the animation">Insert</button>
+                            <button id="update-button" title="Update matrix in the animation">Update</button>
+                            <button id="delete-button" title="Delete matrix from the animation">Delete</button>
+
+                            <label for="hex-input" style="padding: 0 10px 0 25px;">HEX </label>
+                            <input id="hex-input" maxlength="16" placeholder="UINT64 HEX" title="Input matrix as a 64-bit number in HEX format">
+                        </div>
                     </td>
                 </tr>
             </table>
-
         </div>
 
     </div>
@@ -233,7 +241,7 @@
         <li>Click on row or column numbers to toggle whole row or column</li>
         <li>Click on <span class="glyphicon glyphicon-th-large"></span> icon to clear/fill whole matrix</li>
         <li>Shift the matrix Up, Down, Left or Right using arrow buttons</li>
-        <li>Invert matrix via <span class="glyphicon glyphicon-adjust"></span> button</li>
+        <li>Invert matrix via <span class="glyphicon glyphicon-lamp"></span> button</li>
         <li>Insert, Update or Delete images</li>
         <li>Reorder images using Drag-and-Drop in the bottom pane</li>
         <li>Use browser bookmarks to save images</li>
@@ -248,7 +256,7 @@
     <h2 id="hardware">Hardware</h2>
     <p> LED Dot matrix driven by MAX7219 works perfect with Arduino</p>
     <p>
-        <img src="max7219-module.jpg" alt="LED dot matrix MAX7219">
+        <img src="img/max7219-module.jpg" alt="LED dot matrix MAX7219">
     </p>
 
     <h2 id="samples">Code samples</h2>
@@ -256,7 +264,7 @@
         Samples below implement this animation:
     </p>
     <p>
-        <img src="animation.gif">
+        <img src="img/animation.gif">
     </p>
     <h3>Matrix as a 64-bit long integer</h3>
     <p>
