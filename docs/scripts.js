@@ -435,10 +435,8 @@ $(function () {
         setLedsTheme(ledsTheme);
     }
 
-    var pageTheme = Cookies.get('page-theme');
+    var pageTheme = Cookies.get('page-theme') || 'circuit-theme';
 
-    if (pageTheme) {
-        setPageTheme(pageTheme);
-    }
+    setPageTheme(pageTheme);
 
 });
