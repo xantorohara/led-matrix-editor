@@ -26,6 +26,7 @@
 
     <script src="lib/jquery.min.js"></script>
     <script src="lib/jquery-ui.min.js"></script>
+    <script src="lib/js.cookie.js"></script>
 
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/highlight/highlight.pack.js"></script>
@@ -35,7 +36,7 @@
 
 </head>
 
-<body class="red-theme">
+<body class="red-leds">
 
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
@@ -54,11 +55,11 @@
         </p>
 
         <div class="navbar-text pull-right" style="margin-top: 10px; margin-bottom: 5px;">
-            <div id="red-theme-case" class="theme-case" data-theme="red-theme"></div>
-            <div id="yellow-theme-case" class="theme-case" data-theme="yellow-theme"></div>
-            <div id="green-theme-case" class="theme-case" data-theme="green-theme"></div>
-            <div id="blue-theme-case" class="theme-case" data-theme="blue-theme"></div>
-            <div id="white-theme-case" class="theme-case" data-theme="white-theme"></div>
+            <div id="red-leds-case" class="leds-case" data-leds-theme="red-leds"></div>
+            <div id="yellow-leds-case" class="leds-case" data-leds-theme="yellow-leds"></div>
+            <div id="green-leds-case" class="leds-case" data-leds-theme="green-leds"></div>
+            <div id="blue-leds-case" class="leds-case" data-leds-theme="blue-leds"></div>
+            <div id="white-leds-case" class="leds-case" data-leds-theme="white-leds"></div>
         </div>
         <p class="navbar-text pull-right small">
             Select LEDs color <span class="glyphicon glyphicon-hand-right"></span>
@@ -166,7 +167,7 @@
                                 <span id="play-button-stop" style="display: none" class="glyphicon glyphicon-stop"></span>
                             </button>
                         </div>
-                        <div style="height: 50px;"></div>
+                        <div style="height: 25px;"></div>
                         <div id="shift-buttons-container">
                             <button id="shift-up-button" style="top:10px; left:50px;" title="Shift matrix up">
                                 <span class="glyphicon glyphicon-chevron-up"></span>
@@ -184,6 +185,7 @@
                                 <span class="glyphicon glyphicon-lamp"></span>
                             </button>
                         </div>
+                        <div style="height: 25px;"></div>
                     </td>
                 </tr>
 
