@@ -4,26 +4,6 @@ body {
     -webkit-user-select: none;
 }
 
-#red-leds-case {
-    background: #ff0000 radial-gradient(ellipse at 42% 42%, #ffcccc 0%, #ff3333 25%, #ff0000 50%);
-}
-
-#yellow-leds-case {
-    background: #ffcc00 radial-gradient(ellipse at 42% 42%, #ffffcc 0%, #ffcc33 25%, #ffcc00 50%);
-}
-
-#green-leds-case {
-    background: #00ff00 radial-gradient(ellipse at 42% 42%, #ccffcc 0%, #33ff33 25%, #00ff00 50%);
-}
-
-#blue-leds-case {
-    background: #0000ff radial-gradient(ellipse at 42% 42%, #ccccff 0%, #0033ff 25%, #0000ff 50%);
-}
-
-#white-leds-case {
-    background: #ffffff radial-gradient(ellipse at 42% 42%, #ffffff 0%, #eeeeee 25%, #ffffff 50%);
-}
-
 #cols-list,
 #rows-list,
 #leds-matrix {
@@ -67,9 +47,10 @@ body.red-leds #rows-list .item.hover {
     font-weight: bold;
 }
 
+#red-leds-case,
 body.red-leds #frames .item.active,
 body.red-leds #leds-matrix .item.active {
-    background: #ff0000 radial-gradient(ellipse at 42% 42%, #ffcccc 0%, #ff3333 25%, #ff0000 50%);
+    background: #ff0000 radial-gradient(ellipse at 42% 42%, #ffffff 0%, #ff3300 25%, #ff0000 50%);
 }
 
 body.yellow-leds #matrix-toggle:hover,
@@ -81,9 +62,10 @@ body.yellow-leds #rows-list .item.hover {
     font-weight: bold;
 }
 
+#yellow-leds-case,
 body.yellow-leds #frames .item.active,
 body.yellow-leds #leds-matrix .item.active {
-    background: #ffcc00 radial-gradient(ellipse at 42% 42%, #ffffcc 0%, #ffcc33 25%, #ffcc00 50%);
+    background: #ffcc00 radial-gradient(ellipse at 42% 42%, #ffffff 0%, #ffcc00 25%, #ffcc00 50%);
 }
 
 body.green-leds #matrix-toggle:hover,
@@ -95,9 +77,10 @@ body.green-leds #rows-list .item.hover {
     font-weight: bold;
 }
 
+#green-leds-case,
 body.green-leds #frames .item.active,
 body.green-leds #leds-matrix .item.active {
-    background: #00ff00 radial-gradient(ellipse at 42% 42%, #ccffcc 0%, #33ff33 25%, #00ff00 50%);
+    background: #00ff00 radial-gradient(ellipse at 42% 42%, #ffffff 0%, #00ff33 25%, #00ff00 50%);
 }
 
 body.blue-leds #matrix-toggle:hover,
@@ -109,9 +92,10 @@ body.blue-leds #rows-list .item.hover {
     font-weight: bold;
 }
 
+#blue-leds-case,
 body.blue-leds #frames .item.active,
 body.blue-leds #leds-matrix .item.active {
-    background: #0000ff radial-gradient(ellipse at 42% 42%, #ccccff 0%, #0033ff 25%, #0000ff 50%);
+    background: #0000ff radial-gradient(ellipse at 42% 42%, #ffffff 0%, #0033ff 25%, #0000ff 50%);
 }
 
 body.white-leds #matrix-toggle:hover,
@@ -123,6 +107,7 @@ body.white-leds #rows-list .item.hover {
     font-weight: bold;
 }
 
+#white-leds-case,
 body.white-leds #frames .item.active,
 body.white-leds #leds-matrix .item.active {
     background: #ffffff radial-gradient(ellipse at 42% 42%, #ffffff 0%, #eeeeee 25%, #ffffff 50%);
@@ -188,6 +173,15 @@ body.white-leds #leds-matrix .item.active {
     background: lightgray radial-gradient(circle at center, lightgray 0%, darkgray 100%);
 }
 
+#circuit-theme {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background-image: url('img/circuit-icon.png');
+    margin-left: 25px;
+}
+
 #frames {
     padding: 5px;
     height: 200px;
@@ -210,7 +204,7 @@ body.white-leds #leds-matrix .item.active {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    box-shadow: inset 0 0 1px red;
+    box-shadow: inset 0 0 1px #333333;
     background: #808080;
 }
 
@@ -227,13 +221,13 @@ body.white-leds #leds-matrix .item.active {
 }
 
 /*Design*/
-/*
-#plate {
-    background-image: url('img/plate.jpg');
+
+.circuit-theme #circuit {
+    background-image: url('img/circuit.jpg');
     padding: 5px;
 }
 
-#matrix {
+.circuit-theme #matrix {
     color: white;
     border: solid 1px #547eae;
     background-color: #26477a;
@@ -241,30 +235,22 @@ body.white-leds #leds-matrix .item.active {
     margin: 10px;
 }
 
-#leds-container {
-    border: solid 1px #547eae;
+.circuit-theme #leds-container {
+    border: solid 1px #808080;
 }
 
-#player,
-#shift-buttons-container,
-#edit-buttons-container {
-    background: #eee;
-    box-shadow: 10px 10px 10px #333;
-}
-*/
-/*
-#player,
-#shift-buttons-container,
-#edit-buttons-container {
+.circuit-theme #player,
+.circuit-theme #shift-buttons-container,
+.circuit-theme #edit-buttons-container {
     background-color: #26477a;
     border: solid 1px #547eae;
     box-shadow: 10px 10px 10px #333;
-    color: black;
+
 }
 
-#player label,
-#shift-buttons-container label,
-#edit-buttons-container label {
+.circuit-theme #player label,
+.circuit-theme #ms,
+.circuit-theme #shift-buttons-container label,
+.circuit-theme #edit-buttons-container label {
     color: white;
 }
-*/
