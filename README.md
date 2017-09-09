@@ -4,7 +4,7 @@ LED matrix 8x8 online editor
 [LED Matrix Editor](http://xantorohara.github.io/led-matrix-editor) - 
 is online tool for editing and creating animations for LED matrices.
 
-![Screenshot](resources/led-matrix-editor.png)
+![Screenshot](resources/led-matrix-editor-new2.png)
 
 It looks very simple, but it has some handy features:
 
