@@ -169,8 +169,13 @@ body.white-leds #leds-matrix .item.active {
     height: 25px;
     cursor: pointer;
     border-radius: 50%;
-    box-shadow: inset 0 0 1px #666666;
-    background: lightgray radial-gradient(circle at center, lightgray 0%, darkgray 100%);
+    box-shadow: inset 0 0 1px #333333;
+    background: #cccccc radial-gradient(circle at center, lightgray 0%, darkgray 100%);
+}
+
+#leds-matrix .item:hover,
+.leds-case:hover {
+    box-shadow: 0 0 1px #cccccc;
 }
 
 #circuit-theme {
@@ -220,7 +225,7 @@ body.white-leds #leds-matrix .item.active {
     overflow-y: scroll;
 }
 
-/*Design*/
+/*Themes*/
 
 .circuit-theme #circuit {
     background-image: url('img/circuit.jpg');
