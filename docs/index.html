@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="red-leds">
+<body class="red-leds circuit-theme">
 
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
@@ -60,6 +60,7 @@
             <div id="green-leds-case" class="leds-case" data-leds-theme="green-leds"></div>
             <div id="blue-leds-case" class="leds-case" data-leds-theme="blue-leds"></div>
             <div id="white-leds-case" class="leds-case" data-leds-theme="white-leds"></div>
+            <div id="circuit-theme" title="Switch matrix theme"></div>
         </div>
         <p class="navbar-text pull-right small">
             Select LEDs color <span class="glyphicon glyphicon-hand-right"></span>
@@ -131,7 +132,7 @@
 
         </div>
 
-        <div id="plate" class="col-xs-12 col-md-6 col-md-pull-3 text-center debug">
+        <div id="circuit" class="col-xs-12 col-md-6 col-md-pull-3 text-center debug">
             <table style="display: inline-block;">
                 <tr>
                     <td>
@@ -161,7 +162,7 @@
                         <div id="player">
                             <label for="play-delay-input" style="padding-right: 10px;">Play </label>
                             <input id="play-delay-input" type="number" min="100" value="500">
-                            <small> ms.</small>
+                            <small id="ms"> ms.</small>
                             <button id="play-button">
                                 <span id="play-button-play" class="glyphicon glyphicon-play"></span>
                                 <span id="play-button-stop" style="display: none" class="glyphicon glyphicon-stop"></span>

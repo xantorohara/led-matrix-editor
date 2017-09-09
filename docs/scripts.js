@@ -1,4 +1,5 @@
 $(function () {
+    var $body = $('body');
     var $frames = $('#frames');
     var $hexInput = $('#hex-input');
     var $insertButton = $('#insert-button');
@@ -358,6 +359,16 @@ $(function () {
         ledsToHex();
     });
 
+    $('#circuit-theme').click(function () {
+        if ($body.hasClass('circuit-theme')) {
+            $body.removeClass('circuit-theme');
+            Cookies.set('page-theme', 'plain-theme', {path: ''});
+        } else {
+            $body.addClass('circuit-theme');
+            Cookies.set('page-theme', 'circuit-theme', {path: ''});
+        }
+    });
+
     $('.leds-case').click(function () {
         var themeName = $(this).attr('data-leds-theme');
         setLedsTheme(themeName);
@@ -365,7 +376,11 @@ $(function () {
     });
 
     function setLedsTheme(themeName) {
-        $('body').removeClass('red-leds yellow-leds green-leds blue-leds white-leds').addClass(themeName);
+        $body.removeClass('red-leds yellow-leds green-leds blue-leds white-leds').addClass(themeName);
+    }
+
+    function setPageTheme(themeName) {
+        $body.removeClass('plain-theme circuit-theme').addClass(themeName);
     }
 
     var playInterval;
@@ -415,7 +430,15 @@ $(function () {
     loadState();
 
     var ledsTheme = Cookies.get('leds-theme');
+
     if (ledsTheme) {
         setLedsTheme(ledsTheme);
     }
+
+    var pageTheme = Cookies.get('page-theme');
+
+    if (pageTheme) {
+        setPageTheme(pageTheme);
+    }
+
 });
