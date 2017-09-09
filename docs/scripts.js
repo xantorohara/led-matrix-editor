@@ -358,9 +358,15 @@ $(function () {
         ledsToHex();
     });
 
-    $('.theme-case').click(function () {
-        $('body').removeClass('red-theme yellow-theme green-theme blue-theme white-theme').addClass($(this).attr('data-theme'));
+    $('.leds-case').click(function () {
+        var themeName = $(this).attr('data-leds-theme');
+        setLedsTheme(themeName);
+        Cookies.set('leds-theme', themeName, {path: ''});
     });
+
+    function setLedsTheme(themeName) {
+        $('body').removeClass('red-leds yellow-leds green-leds blue-leds white-leds').addClass(themeName);
+    }
 
     var playInterval;
 
@@ -407,4 +413,9 @@ $(function () {
     });
 
     loadState();
+
+    var ledsTheme = Cookies.get('leds-theme');
+    if (ledsTheme) {
+        setLedsTheme(ledsTheme);
+    }
 });

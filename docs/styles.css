@@ -4,24 +4,24 @@ body {
     -webkit-user-select: none;
 }
 
-#red-theme-case {
-    background: #ff0000 radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #ff3333 25%, #ff0000 50%);
+#red-leds-case {
+    background: #ff0000 radial-gradient(ellipse at 42% 42%, #ffcccc 0%, #ff3333 25%, #ff0000 50%);
 }
 
-#yellow-theme-case {
-    background: #ffcc00 radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #ffcc33 25%, #ffcc00 50%);
+#yellow-leds-case {
+    background: #ffcc00 radial-gradient(ellipse at 42% 42%, #ffffcc 0%, #ffcc33 25%, #ffcc00 50%);
 }
 
-#green-theme-case {
-    background: #00ff00 radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #33ff33 25%, #00ff00 50%);
+#green-leds-case {
+    background: #00ff00 radial-gradient(ellipse at 42% 42%, #ccffcc 0%, #33ff33 25%, #00ff00 50%);
 }
 
-#blue-theme-case {
-    background: #0000ff radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #0033ff 25%, #0000ff 50%);
+#blue-leds-case {
+    background: #0000ff radial-gradient(ellipse at 42% 42%, #ccccff 0%, #0033ff 25%, #0000ff 50%);
 }
 
-#white-theme-case {
-    background: #cccccc radial-gradient(ellipse at 42% 42%, #cccccc 0%, #ffffff 25%, #f0f0f0 50%);
+#white-leds-case {
+    background: #ffffff radial-gradient(ellipse at 42% 42%, #ffffff 0%, #eeeeee 25%, #ffffff 50%);
 }
 
 #cols-list,
@@ -44,13 +44,13 @@ body {
     max-height: 25px;
 
     cursor: pointer;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 #leds-matrix .item {
     border-radius: 50%;
     box-shadow: inset 0 0 1px #666666;
-    background: #cccccc radial-gradient(ellipse at 42% 42%, #cccccc 0%, #999999 50%);
+    background: #808080 radial-gradient(ellipse at 42% 42%, #999999 0%, #808080 50%);
 }
 
 #leds-matrix {
@@ -58,74 +58,74 @@ body {
     box-shadow: 1px 1px 10px #333;
 }
 
-body.red-theme #matrix-toggle:hover,
-body.red-theme #cols-list .item:hover,
-body.red-theme #rows-list .item:hover,
-body.red-theme #cols-list .item.hover,
-body.red-theme #rows-list .item.hover {
+body.red-leds #matrix-toggle:hover,
+body.red-leds #cols-list .item:hover,
+body.red-leds #rows-list .item:hover,
+body.red-leds #cols-list .item.hover,
+body.red-leds #rows-list .item.hover {
     color: #ff3333;
     font-weight: bold;
 }
 
-body.red-theme #frames .item.active,
-body.red-theme #leds-matrix .item.active {
-    background: #ff0000 radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #ff3333 25%, #ff0000 50%);
+body.red-leds #frames .item.active,
+body.red-leds #leds-matrix .item.active {
+    background: #ff0000 radial-gradient(ellipse at 42% 42%, #ffcccc 0%, #ff3333 25%, #ff0000 50%);
 }
 
-body.yellow-theme #matrix-toggle:hover,
-body.yellow-theme #cols-list .item:hover,
-body.yellow-theme #rows-list .item:hover,
-body.yellow-theme #cols-list .item.hover,
-body.yellow-theme #rows-list .item.hover {
+body.yellow-leds #matrix-toggle:hover,
+body.yellow-leds #cols-list .item:hover,
+body.yellow-leds #rows-list .item:hover,
+body.yellow-leds #cols-list .item.hover,
+body.yellow-leds #rows-list .item.hover {
     color: #ffcc33;
     font-weight: bold;
 }
 
-body.yellow-theme #frames .item.active,
-body.yellow-theme #leds-matrix .item.active {
-    background: #ffcc00 radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #ffcc33 25%, #ffcc00 50%);
+body.yellow-leds #frames .item.active,
+body.yellow-leds #leds-matrix .item.active {
+    background: #ffcc00 radial-gradient(ellipse at 42% 42%, #ffffcc 0%, #ffcc33 25%, #ffcc00 50%);
 }
 
-body.green-theme #matrix-toggle:hover,
-body.green-theme #cols-list .item:hover,
-body.green-theme #rows-list .item:hover,
-body.green-theme #cols-list .item.hover,
-body.green-theme #rows-list .item.hover {
+body.green-leds #matrix-toggle:hover,
+body.green-leds #cols-list .item:hover,
+body.green-leds #rows-list .item:hover,
+body.green-leds #cols-list .item.hover,
+body.green-leds #rows-list .item.hover {
     color: #33ff33;
     font-weight: bold;
 }
 
-body.green-theme #frames .item.active,
-body.green-theme #leds-matrix .item.active {
-    background: #00ff00 radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #33ff33 25%, #00ff00 50%);
+body.green-leds #frames .item.active,
+body.green-leds #leds-matrix .item.active {
+    background: #00ff00 radial-gradient(ellipse at 42% 42%, #ccffcc 0%, #33ff33 25%, #00ff00 50%);
 }
 
-body.blue-theme #matrix-toggle:hover,
-body.blue-theme #cols-list .item:hover,
-body.blue-theme #rows-list .item:hover,
-body.blue-theme #cols-list .item.hover,
-body.blue-theme #rows-list .item.hover {
+body.blue-leds #matrix-toggle:hover,
+body.blue-leds #cols-list .item:hover,
+body.blue-leds #rows-list .item:hover,
+body.blue-leds #cols-list .item.hover,
+body.blue-leds #rows-list .item.hover {
     color: #0033ff;
     font-weight: bold;
 }
 
-body.blue-theme #frames .item.active,
-body.blue-theme #leds-matrix .item.active {
-    background: #0000ff radial-gradient(ellipse at 42% 42%, #f0f0f0 0%, #0033ff 25%, #0000ff 50%);
+body.blue-leds #frames .item.active,
+body.blue-leds #leds-matrix .item.active {
+    background: #0000ff radial-gradient(ellipse at 42% 42%, #ccccff 0%, #0033ff 25%, #0000ff 50%);
 }
 
-body.white-theme #matrix-toggle:hover,
-body.white-theme #cols-list .item:hover,
-body.white-theme #rows-list .item:hover,
-body.white-theme #cols-list .item.hover,
-body.white-theme #rows-list .item.hover {
+body.white-leds #matrix-toggle:hover,
+body.white-leds #cols-list .item:hover,
+body.white-leds #rows-list .item:hover,
+body.white-leds #cols-list .item.hover,
+body.white-leds #rows-list .item.hover {
     color: #ffffff;
     font-weight: bold;
 }
 
-body.white-theme #frames .item.active,
-body.white-theme #leds-matrix .item.active {
-    background: #cccccc radial-gradient(ellipse at 42% 42%, #cccccc 0%, #ffffff 25%, #f0f0f0 50%);
+body.white-leds #frames .item.active,
+body.white-leds #leds-matrix .item.active {
+    background: #ffffff radial-gradient(ellipse at 42% 42%, #ffffff 0%, #eeeeee 25%, #ffffff 50%);
 }
 
 #player {
@@ -178,7 +178,7 @@ body.white-theme #leds-matrix .item.active {
     box-sizing: border-box;
 }
 
-.theme-case {
+.leds-case {
     display: inline-block;
     width: 25px;
     height: 25px;
@@ -210,8 +210,8 @@ body.white-theme #leds-matrix .item.active {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    box-shadow: inset 0 0 1px lightslategray;
-    background: lightgrey;
+    box-shadow: inset 0 0 1px red;
+    background: #808080;
 }
 
 #frames .frame.selected {
@@ -250,5 +250,21 @@ body.white-theme #leds-matrix .item.active {
 #edit-buttons-container {
     background: #eee;
     box-shadow: 10px 10px 10px #333;
+}
+*/
+/*
+#player,
+#shift-buttons-container,
+#edit-buttons-container {
+    background-color: #26477a;
+    border: solid 1px #547eae;
+    box-shadow: 10px 10px 10px #333;
+    color: black;
+}
+
+#player label,
+#shift-buttons-container label,
+#edit-buttons-container label {
+    color: white;
 }
 */
