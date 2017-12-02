@@ -189,7 +189,7 @@ body.white-leds #leds-matrix .item.active {
 
 #frames {
     padding: 5px;
-    height: 200px;
+    height: 160px;
     overflow-y: scroll;
     text-align: left;
     border: solid #666666 1px;

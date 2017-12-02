@@ -59,41 +59,49 @@ $(function () {
             out.push('</table>');
             return out.join('');
         },
-        patternsToCodeUint64Array: function (patterns) {
-            var out = ['const uint64_t IMAGES[] = {\n'];
+        patternsToCodeCppArray: function (patterns) {
+            var out = ['const byte IMAGES[][8] = {\n'];
 
             for (var i = 0; i < patterns.length; i++) {
-                out.push('  0x');
-                out.push(patterns[i]);
+                out.push('  {');
+                for (var j = 7; j >= 0; j--) {
+                    var byte = patterns[i].substr(2 * j, 2);
+                    byte = parseInt(byte, 16).toString(16);
+                    byte = ('00' + byte).substr(-2);
+                    // byte = byte.split('').reverse().join('');
+                    out.push('0x');
+                    out.push(byte);
+                    out.push(', ');
+                }
+                out.pop();
+                out.push('}');
                 out.push(',\n');
             }
             out.pop();
             out.push('\n};\n');
             out.push('const int IMAGES_LEN = sizeof(IMAGES)/8;\n');
-
             return out.join('');
         },
-        patternsToCodeBytesArray: function (patterns) {
-            var out = ['const byte IMAGES[][8] = {\n'];
+        patternsToCodeJSArray: function (patterns) {
+            var out = ['var pictures = [\n'];
 
             for (var i = 0; i < patterns.length; i++) {
-                out.push('{\n');
+                out.push('  [');
                 for (var j = 7; j >= 0; j--) {
                     var byte = patterns[i].substr(2 * j, 2);
-                    byte = parseInt(byte, 16).toString(2);
-                    byte = ('00000000' + byte).substr(-8);
-                    byte = byte.split('').reverse().join('');
-                    out.push('  B');
+                    byte = parseInt(byte, 16).toString(16);
+                    byte = ('00' + byte).substr(-2);
+                    // byte = byte.split('').reverse().join('');
+                    out.push('0x');
                     out.push(byte);
-                    out.push(',\n');
+                    out.push(', ');
                 }
                 out.pop();
-                out.push('\n}');
-                out.push(',');
+                out.push(']');
+                out.push(',\n');
             }
             out.pop();
-            out.push('};\n');
-            out.push('const int IMAGES_LEN = sizeof(IMAGES)/8;\n');
+            out.push('\n];\n');
             return out.join('');
         },
         fixPattern: function (pattern) {
@@ -148,10 +156,11 @@ $(function () {
     function printArduinoCode(patterns) {
         if (patterns.length) {
             var code;
-            if ($('#images-as-byte-arrays').prop("checked")) {
-                code = converter.patternsToCodeBytesArray(patterns);
-            } else {
-                code = converter.patternsToCodeUint64Array(patterns);
+            if ($('#images-as-cpp-arrays').prop("checked")) {
+                code = converter.patternsToCodeCppArray(patterns);
+            }
+			if ($('#images-as-js-arrays').prop("checked")) {
+                code = converter.patternsToCodeJSArray(patterns);
             }
             $('#output').val(code);
         }
@@ -339,7 +348,12 @@ $(function () {
         processToSave($newFrame);
     });
 
-    $('#images-as-byte-arrays').change(function () {
+    $('#images-as-cpp-arrays').change(function () {
+        var patterns = framesToPatterns();
+        printArduinoCode(patterns);
+    });
+	
+	$('#images-as-js-arrays').change(function () {
         var patterns = framesToPatterns();
         printArduinoCode(patterns);
     });
