@@ -1,7 +1,5 @@
 body {
     background: #eee;
-    user-select: none;
-    -webkit-user-select: none;
 }
 
 #cols-list,
@@ -258,4 +256,9 @@ body.white-leds #leds-matrix .item.active {
 .circuit-theme #shift-buttons-container label,
 .circuit-theme #edit-buttons-container label {
     color: white;
+}
+
+#circuit, #frames {
+    user-select: none;
+    -webkit-user-select: none;
 }
