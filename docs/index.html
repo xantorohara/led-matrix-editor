@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="lib/highlight/styles/androidstudio.css">
+    <link rel="stylesheet" href="lib/fontawesome/css/all.min.css"/>
 
     <script src="lib/jquery.min.js"></script>
     <script src="lib/jquery-ui.min.js"></script>
@@ -31,8 +32,8 @@
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/highlight/highlight.pack.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="styles.css?20170904"/>
-    <script src="scripts.js?20170904"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css?20190914"/>
+    <script src="scripts.js?20190914"></script>
 
 </head>
 
@@ -50,8 +51,8 @@
             <li><a href="v1/">Previous version</a></li>
         </ul>
 
-        <p class="navbar-text pull-right small">
-            <span class="glyphicon glyphicon-hand-up"></span>
+        <p class="navbar-text pull-right">
+            <span class="fa fa-hand-point-up"></span>
             Use CTRL+D to save current state as a bookmark
         </p>
 
@@ -63,8 +64,8 @@
             <div id="white-leds-case" class="leds-case" data-leds-theme="white-leds"></div>
             <div id="circuit-theme" title="Switch matrix theme"></div>
         </div>
-        <p class="navbar-text pull-right small">
-            Select LEDs color <span class="glyphicon glyphicon-hand-right"></span>
+        <p class="navbar-text pull-right">
+            Select LEDs color <span class="fa fa-hand-point-right"></span>
         </p>
     </div>
 </nav>
@@ -140,7 +141,7 @@
                         <table id="matrix">
                             <tr>
                                 <td id="matrix-toggle" title="Select/Clear all elements">
-                                    <span class="glyphicon glyphicon-th-large"></span>
+                                    <span class="fa fa-th-large"></span>
                                 </td>
                                 <td>
                                     <div id="cols-container"></div>
@@ -165,27 +166,35 @@
                             <input id="play-delay-input" type="number" min="100" value="500">
                             <small id="ms"> ms.</small>
                             <button id="play-button">
-                                <span id="play-button-play" class="glyphicon glyphicon-play"></span>
+                                <span id="play-button-play" class="fa fa-play"></span>
                                 <span id="play-button-stop" style="display: none"
-                                      class="glyphicon glyphicon-stop"></span>
+                                      class="fa fa-stop"></span>
                             </button>
                         </div>
                         <div style="height: 25px;"></div>
                         <div id="shift-buttons-container">
                             <button id="shift-up-button" style="top:10px; left:50px;" title="Shift matrix up">
-                                <span class="glyphicon glyphicon-chevron-up"></span>
+                                <span class="fa fa-chevron-up"></span>
                             </button>
                             <button id="shift-right-button" style="top:50px; left:90px;" title="Shift matrix right">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="fa fa-chevron-right"></span>
                             </button>
                             <button id="shift-down-button" style="top:90px; left:50px;" title="Shift matrix down">
-                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                <span class="fa fa-chevron-down"></span>
                             </button>
                             <button id="shift-left-button" style="top:50px; left:10px;" title="Shift matrix left">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="fa fa-chevron-left"></span>
                             </button>
                             <button id="invert-button" style="top: 50px; left: 50px;" title="Invert matrix">
-                                <span class="glyphicon glyphicon-lamp"></span>
+                                <span class="fa fa-adjust"></span>
+                            </button>
+                            <button id="rotate-back-button" style="top: 10px; left: 10px;"
+                                    title="Rotate matrix counterclock-wise">
+                                <span class="fa fa-undo"></span>
+                            </button>
+                            <button id="rotate-button" style="top: 10px; left: 90px;"
+                                    title="Rotate matrix clockwise">
+                                <span class="fa fa-redo"></span>
                             </button>
                         </div>
                         <div style="height: 25px;"></div>
@@ -214,7 +223,7 @@
     <div class="row" style="padding: 5px;">
         <small>
             Use Drag-and-Drop to reorder matrices
-            <span class="glyphicon glyphicon-hand-down"></span>
+            <span class="fa fa-hand-down"></span>
         </small>
     </div>
 
@@ -245,9 +254,10 @@
     <ul>
         <li>Click on LED to toggle single item</li>
         <li>Click on row or column numbers to toggle whole row or column</li>
-        <li>Click on <span class="glyphicon glyphicon-th-large"></span> icon to clear/fill whole matrix</li>
+        <li>Click on <span class="fa fa-th-large"></span> icon to clear/fill whole matrix</li>
         <li>Shift the matrix Up, Down, Left or Right using arrow buttons</li>
-        <li>Invert matrix via <span class="glyphicon glyphicon-lamp"></span> button</li>
+        <li>Invert matrix via <span class="fa fa-adjust"></span> button</li>
+        <li>Rotate matrix clockwise or counterclock-wise</li>
         <li>Insert, Update or Delete images</li>
         <li>Reorder images using Drag-and-Drop in the bottom pane</li>
         <li>Use browser bookmarks to save images</li>
@@ -574,7 +584,7 @@ void loop() {
 </code></pre>
 
     <p class="text-center">
-        &copy; 2015-2017 <a href="mailto:xantorohara@gmail.com" class="navbar-link">Xantorohara</a>
+        &copy; 2015-2019 <a href="mailto:xantorohara@gmail.com" class="navbar-link">Xantorohara</a>
     </p>
 
 </div>
