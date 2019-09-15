@@ -8,6 +8,78 @@ $(function () {
 
     var $leds, $cols, $rows;
 
+    function Bitmap(hexString) {
+        let matrix = fromHexString(hexString);
+
+        function fromHexString(hexString) {
+            const out = [];
+            for (let i = 0; i < hexString.length / 2; i++) {
+                let byte = parseInt(hexString.substr(i * 2, 2), 16).toString(2);
+                byte = ('00000000' + byte).substr(-8);
+                out.push(byte.split('').reverse());
+            }
+            return out.reverse();
+        }
+
+        function toHexString() {
+            const out = [];
+            for (let i = 0; i < matrix.length; i++) {
+                let byte = parseInt(matrix[i].slice().reverse().join(''), 2).toString(16);
+                byte = ('0' + byte).substr(-2);
+                out.push(byte);
+            }
+            return out.reverse().join('');
+        }
+
+        function transpose() {
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = i; j < 8; j++) {
+                    const tmp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = tmp;
+                }
+            }
+        }
+
+        function shiftLeft() {
+            for (let i = 0; i < matrix.length; i++) {
+                const len = matrix[i].length - 1;
+                for (let j = 0; j < len; j++) {
+                    matrix[i][j] = matrix[i][j + 1];
+                }
+                matrix[i][len] = 0;
+            }
+        }
+
+        function shiftRight() {
+            for (let i = 0; i < matrix.length; i++) {
+                const len = matrix[i].length - 1;
+                for (let j = len; j > 0; j--) {
+                    matrix[i][j] = matrix[i][j - 1];
+                }
+                matrix[i][0] = 0;
+            }
+        }
+
+        function rotate() {
+            matrix.reverse();
+            transpose();
+        }
+
+        function rotateBack() {
+            transpose();
+            matrix.reverse();
+        }
+
+        return {
+            toHexString: toHexString,
+            shiftLeft: shiftLeft,
+            shiftRight: shiftRight,
+            rotate: rotate,
+            rotateBack: rotateBack,
+        }
+    }
+
     var generator = {
         tableCols: function () {
             var out = ['<table id="cols-list"><tr>'];
@@ -243,36 +315,31 @@ $(function () {
     });
 
     $('#shift-right-button').click(function () {
-        var val = getInputHexValue();
-
-        var out = [];
-        for (var i = 0; i < 8; i++) {
-            var byte = val.substr(i * 2, 2);
-            byte = parseInt(byte, 16);
-            byte <<= 1;
-            byte = byte.toString(16);
-            byte = ('0' + byte).substr(-2);
-            out.push(byte);
-        }
-        val = out.join('');
-        $hexInput.val(val);
+        const bitmap = Bitmap(getInputHexValue());
+        bitmap.shiftRight();
+        $hexInput.val(bitmap.toHexString());
         hexInputToLeds();
     });
 
     $('#shift-left-button').click(function () {
-        var val = getInputHexValue();
+        const bitmap = Bitmap(getInputHexValue());
+        bitmap.shiftLeft();
+        $hexInput.val(bitmap.toHexString());
+        hexInputToLeds();
+    });
 
-        var out = [];
-        for (var i = 0; i < 8; i++) {
-            var byte = val.substr(i * 2, 2);
-            byte = parseInt(byte, 16);
-            byte >>= 1;
-            byte = byte.toString(16);
-            byte = ('0' + byte).substr(-2);
-            out.push(byte);
-        }
-        val = out.join('');
-        $hexInput.val(val);
+
+    $('#rotate-button').click(function () {
+        const bitmap = Bitmap(getInputHexValue());
+        bitmap.rotate();
+        $hexInput.val(bitmap.toHexString());
+        hexInputToLeds();
+    });
+
+    $('#rotate-back-button').click(function () {
+        const bitmap = Bitmap(getInputHexValue());
+        bitmap.rotateBack();
+        $hexInput.val(bitmap.toHexString());
         hexInputToLeds();
     });
 

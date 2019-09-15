@@ -149,6 +149,8 @@ body.white-leds #leds-matrix .item.active {
     margin: 0 10px;
 }
 
+#rotate-button,
+#rotate-back-button,
 #invert-button,
 #shift-up-button,
 #shift-right-button,
