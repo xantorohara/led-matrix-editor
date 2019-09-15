@@ -4,7 +4,7 @@ LED matrix 8x8 online editor
 [LED Matrix Editor](http://xantorohara.github.io/led-matrix-editor) - 
 is online tool for editing and creating animations for LED matrices.
 
-![Screenshot](resources/led-matrix-editor-new2.png)
+![Screenshot](resources/led-matrix-editor-screenshot.png)
 
 It looks very simple, but it has some handy features:
 
@@ -12,6 +12,7 @@ It looks very simple, but it has some handy features:
 - Toggle LEDs using a mouse
 - Toggle a whole row or column by clicking the appropriate matrix's index
 - Shift the matrix Up, Down, Left or Right via the single click
+- Rotate matrix clockwise or counterclock-wise
 - Invert or Clear matrix
 - Collect matrices in the bottom pane and then reorder them using the Drag-and-Drop
 - Update images as well as insert new or delete existing
