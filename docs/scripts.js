@@ -284,6 +284,39 @@ $(function () {
         saveState();
     }
 
+    function parseArduinoCode(text) {
+        const UINT64_REGEX = /^\s*const\s+uint64_t\s+(\w+)\s*\[\s*\]\s*=\s*{((?:.|\n)*)}\s*;\s*(?:const\s+(\w+)\s+\1_LEN\s*=\s*sizeof\s*\(\s*\1\s*\)\s*\/\s*8\s*;\s*)?$/;
+        const UINT8_REGEX = /^\s*const\s+(?:uint8_t|byte)\s+(\w+)\s*\[\s*\]\s*\[\s*8\s*\]\s*=\s*{((?:.|\n)*)}\s*;\s*(?:const\s+(\w+)\s+\1_LEN\s*=\s*sizeof\s*\(\s*\1\s*\)\s*\/\s*8\s*;\s*)?$/;
+
+        let matrices;
+
+        let match;
+        if (match = UINT64_REGEX.exec(text)) {
+            matrices = Array.from(match[2].matchAll(/0x[0-9a-zA-Z]{16}/g)).map(match => match[0].substring(2));
+        } else if (match = UINT8_REGEX.exec(text)) {
+            let bytesStr = Array.from(match[2].matchAll(/0b[01]{8}/g)).map(match => match[0]);
+            if (bytesStr.length % 8 !== 0) return null;
+            let bytes = bytesStr.map(b => parseInt(
+                b
+                    .substring(2)
+                    .split('')
+                    .reverse()
+                    .join(''),
+                2
+            ).toString(16).padStart(2, '0'));
+            let groups = [];
+            while (bytes.length) {
+                groups.push(bytes.splice(0, 8));
+            }
+
+            matrices = groups.map(g => g.reverse().join(''));
+        } else {
+            return null;
+        }
+
+        return matrices.join('|');
+    }
+
     $('#cols-container').append($(generator.tableCols()));
     $('#rows-container').append($(generator.tableRows()));
     $('#leds-container').append($(generator.tableLeds()));
@@ -424,6 +457,21 @@ $(function () {
         var col = $(this).attr('data-col');
         $leds.find('.item').toggleClass('active', $leds.find('.item.active').length != 64);
         ledsToHex();
+    });
+
+    $('#output').on('paste', function (e) {
+        var value = e.originalEvent.clipboardData.getData('text');
+
+        const hash = parseArduinoCode(value);
+        if (hash) {
+            location.hash = hash;
+        } else {
+            alert("Couldn't parse pasted code as valid LED Matrix Editor-generated C ;(");
+        }
+    });
+
+    $('#output').focus(function() {
+        $(this).select();
     });
 
     $('#circuit-theme').click(function () {
