@@ -146,7 +146,7 @@ $(function () {
             return out.join('');
         },
         patternsToCodeBytesArray: function (patterns) {
-            var out = ['const byte IMAGES[][8] = {\n'];
+            var out = ['const uint8_t IMAGES[][8] = {\n'];
 
             for (var i = 0; i < patterns.length; i++) {
                 out.push('{\n');
@@ -155,7 +155,7 @@ $(function () {
                     byte = parseInt(byte, 16).toString(2);
                     byte = ('00000000' + byte).substr(-8);
                     byte = byte.split('').reverse().join('');
-                    out.push('  B');
+                    out.push('  0b');
                     out.push(byte);
                     out.push(',\n');
                 }
