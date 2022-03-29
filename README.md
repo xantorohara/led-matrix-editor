@@ -17,6 +17,7 @@ It looks very simple, but it has some handy features:
 - Collect matrices in the bottom pane and then reorder them using the Drag-and-Drop
 - Update images as well as insert new or delete existing
 - Save images as a C code for Arduino
+- Import the C code back into the editor at any time
 - Choose type of generated code (64-bit integers or arrays of bytes)
 - Predefined fonts 8x8
 - Use browsing history and save images as a link or bookmark, so you never lost your creations
