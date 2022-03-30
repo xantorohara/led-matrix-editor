@@ -286,7 +286,7 @@ $(function () {
 
     function parseArduinoCode(text) {
         // Matches the uint64_t-based code output (and more)
-        const UINT64_REGEX = /^\s*const\s+uint64_t\s+(\w+)\s*\[\s*\]\s*=\s*{((?:.|\n)*)}\s*;\s*(?:const\s+(\w+)\s+\1_LEN\s*=\s*sizeof\s*\(\s*\1\s*\)\s*\/\s*8\s*;\s*)?$/;
+        const UINT64_REGEX = /const\s+uint64_t\s+(\w+)\s*\[\s*\]\s*=\s*{((?:.|\n)*)}\s*;/;
         // Matches uint8_t/byte-based code output (and more)
         const UINT8_REGEX = /^\s*const\s+(?:uint8_t|byte)\s+(\w+)\s*\[\s*\]\s*\[\s*8\s*\]\s*=\s*{((?:.|\n)*)}\s*;\s*(?:const\s+(\w+)\s+\1_LEN\s*=\s*sizeof\s*\(\s*\1\s*\)\s*\/\s*8\s*;\s*)?$/;
 
