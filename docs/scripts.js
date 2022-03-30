@@ -285,25 +285,25 @@ $(function () {
     }
 
     function parseArduinoCode(text) {
+        // Matches the uint64_t-based code output (and more)
         const UINT64_REGEX = /^\s*const\s+uint64_t\s+(\w+)\s*\[\s*\]\s*=\s*{((?:.|\n)*)}\s*;\s*(?:const\s+(\w+)\s+\1_LEN\s*=\s*sizeof\s*\(\s*\1\s*\)\s*\/\s*8\s*;\s*)?$/;
+        // Matches uint8_t/byte-based code output (and more)
         const UINT8_REGEX = /^\s*const\s+(?:uint8_t|byte)\s+(\w+)\s*\[\s*\]\s*\[\s*8\s*\]\s*=\s*{((?:.|\n)*)}\s*;\s*(?:const\s+(\w+)\s+\1_LEN\s*=\s*sizeof\s*\(\s*\1\s*\)\s*\/\s*8\s*;\s*)?$/;
 
+        // List of 16 char-long hex strings representing the matrices as they appear in the URL hash
         let matrices;
 
         let match;
         if (match = UINT64_REGEX.exec(text)) {
-            matrices = Array.from(match[2].matchAll(/0x[0-9a-zA-Z]{16}/g)).map(match => match[0].substring(2));
+            matrices = Array.from(match[2].matchAll(/0x([0-9a-zA-Z]{16})/g)).map(match => match[1]);
         } else if (match = UINT8_REGEX.exec(text)) {
-            let bytesStr = Array.from(match[2].matchAll(/0b[01]{8}/g)).map(match => match[0]);
+            let bytesStr = Array.from(match[2].matchAll(/(?:0b|0B|B)([01]{8})/g)).map(match => match[1]);
             if (bytesStr.length % 8 !== 0) return null;
-            let bytes = bytesStr.map(b => parseInt(
-                b
-                    .substring(2)
-                    .split('')
-                    .reverse()
-                    .join(''),
-                2
-            ).toString(16).padStart(2, '0'));
+            let bytes = bytesStr.map(
+                b => parseInt(b.split('').reverse().join(''), 2).toString(16).padStart(2, '0')
+            );
+
+            // Split the parsed numbers into groups of 8 elements (each group being a matrix)
             let groups = [];
             while (bytes.length) {
                 groups.push(bytes.splice(0, 8));
