@@ -92,3 +92,4 @@ You may choose how to store images - as long integers or as byte arrays:
 There are a lot LED matrix modules you can buy here:
 
 [![Module](resources/max7219-module.jpg)](http://s.click.aliexpress.com/e/JUrN7eM)
+
